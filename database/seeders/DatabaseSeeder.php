@@ -15,11 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Admin default (untuk admin panel nanti) — hanya dibuat jika belum ada
+        User::firstOrCreate(
+            ['email' => 'admin@vobi.id'],
+            ['name' => 'VOBI Admin', 'password' => bcrypt('vobi-admin-2024')]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            MarketplaceSeeder::class,   // kreator + campaign/paket
+            PostSeeder::class,          // artikel blog
         ]);
     }
 }
