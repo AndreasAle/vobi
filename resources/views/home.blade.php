@@ -10,30 +10,25 @@
   <video class="hero-vid" data-vid="hero" autoplay muted loop playsinline preload="auto"></video>
   <div class="wrap">
     <div class="hero-copy">
-      <div class="hero-eyebrow">Talent Agency <span>/</span> Creator Economy</div>
+      <div class="hero-eyebrow">Creator Economy <span>/</span> Digital Growth</div>
       <h1 class="disp">
-        <span class="l"><span>A Home That</span></span>
+        <span class="l"><span>A Home</span></span>
         <span class="l"><span class="flame">Changes</span></span>
         <span class="l"><span>Everything.</span></span>
       </h1>
       <div class="sub-row">
         <span class="sub-bar"></span>
-        <p class="sub">Rumah bagi <b>talent</b> &amp; <b>brand</b> — <b>VOBI MCN</b> untuk affiliate &amp; live TikTok, <b>SEAMEDIA</b> untuk konten &amp; website konversi.</p>
+        <p class="sub">Every great journey begins with a place to belong. Kami menciptakan rumah &mdash; tempat yang nyaman untuk sebuah ide lahir, kolaborasi tumbuh, dan bisnis berkembang.</p>
       </div>
     </div>
     <div class="hero-shelf">
       <div class="shelf-head"><span class="sh-label">Layanan Kami</span><span class="sh-line"></span><span class="sh-hint">geser untuk lihat &rarr;</span></div>
       <div class="svc-strip" id="svcstrip">
-        <div class="svc-card" style="--c:#3B2E6E"><div class="pic" data-bg="eco1"></div><span class="arrow">&#8599;</span><div class="t">MCN Management</div><div class="tag2">VOBI MCN</div></div>
-        <div class="svc-card" style="--c:#1F5D52"><div class="pic" data-bg="eco2"></div><span class="arrow">&#8599;</span><div class="t">TikTok Affiliate (TAP)</div><div class="tag2">VOBI MCN</div></div>
-        <div class="svc-card" style="--c:#5B4A7A"><div class="pic" data-bg="succ3"></div><span class="arrow">&#8599;</span><div class="t">Live Streaming Support</div><div class="tag2">VOBI MCN</div></div>
-        <div class="svc-card" style="--c:#2E3B73"><div class="pic" data-bg="vobi-beauty"></div><span class="arrow">&#8599;</span><div class="t">Product Footage</div><div class="tag2">VOBI MCN</div></div>
-        <div class="svc-card" style="--c:#B05A32"><div class="pic" data-bg="vobi-content"></div><span class="arrow">&#8599;</span><div class="t">Viral Content</div><div class="tag2">SEAMEDIA</div></div>
-        <div class="svc-card" style="--c:#276674"><div class="pic" data-bg="vobi-event"></div><span class="arrow">&#8599;</span><div class="t">Story Driven</div><div class="tag2">SEAMEDIA</div></div>
-        <div class="svc-card" style="--c:#7A3560"><div class="pic" data-bg="vobi-web"></div><span class="arrow">&#8599;</span><div class="t">Conversion Web</div><div class="tag2">SEAMEDIA</div></div>
-        <div class="svc-card" style="--c:#8A3B57"><div class="pic" data-bg="succ2"></div><span class="arrow">&#8599;</span><div class="t">WA Funnel</div><div class="tag2">SEAMEDIA</div></div>
-        <div class="svc-card" style="--c:#2B4E86"><div class="pic" data-bg="eco3"></div><span class="arrow">&#8599;</span><div class="t">Ads &amp; Tracking</div><div class="tag2">VOBI MCN</div></div>
-        <div class="svc-card" style="--c:#6B4A2A"><div class="pic" data-bg="eco4"></div><span class="arrow">&#8599;</span><div class="t">SEO &amp; Optimasi</div><div class="tag2">SEAMEDIA</div></div>
+        <div class="svc-card" style="--c:#3B2E6E"><div class="pic" data-bg="eco1"></div><span class="arrow">&#8599;</span><div class="t">Creator Management</div><div class="tag2">VOBI MCN</div></div>
+        <div class="svc-card" style="--c:#B05A32"><div class="pic" data-bg="eco2"></div><span class="arrow">&#8599;</span><div class="t">Campaign Marketplace</div><div class="tag2">VOBI</div></div>
+        <div class="svc-card" style="--c:#1F5D52"><div class="pic" data-bg="vobi-content"></div><span class="arrow">&#8599;</span><div class="t">Viral &amp; Story Driven Content</div><div class="tag2">SEAMEDIA</div></div>
+        <div class="svc-card" style="--c:#2B4E86"><div class="pic" data-bg="vobi-web"></div><span class="arrow">&#8599;</span><div class="t">Conversion Web &amp; SEO</div><div class="tag2">SEAMEDIA</div></div>
+        <div class="svc-card" style="--c:#7A3560"><div class="pic" data-bg="succ3"></div><span class="arrow">&#8599;</span><div class="t">Live Streaming Service</div><div class="tag2">VOBI MCN</div></div>
       </div>
     </div>
   </div>
@@ -106,50 +101,33 @@
 <section id="eco">
   <div class="wrap">
     <div class="sec-head rv">
-      <div><span class="eyebrow">Business Ecosystem</span><h2 class="disp">Empat pilar,<br>satu rumah.</h2></div>
-      <p class="r">Tiap unit punya fokus sendiri. Klik untuk kenal lebih dalam.</p>
+      <div><span class="eyebrow">Everything You Need &middot; Under One Roof</span><h2 class="disp">Empat pilar,<br>satu rumah.</h2></div>
+      <p class="r">Satu tujuan: membantu bisnis bertumbuh lebih cepat.</p>
     </div>
     <div class="eco2" id="eco2">
       <div class="epar feat" style="--h:540px;--o:0">
         <a class="ecard big" href="{{ route('ekosistem') }}"><div class="eimg" data-bg="eco1"></div><span class="enum">01</span><span class="ego">↗</span>
-          <div class="ebody"><span class="etag">Talent & Creator Management</span><div class="en">VOBI MCN</div>
-            <p class="edesc">Rumah bagi 600+ talent, dari micro sampai mega-scale — dibina, dilatih, dan diberi panggung.</p></div>
+          <div class="ebody"><span class="etag">TikTok Affiliate &middot; MCN</span><div class="en">VOBI</div>
+            <p class="edesc">Rumah bagi 600+ talent — dibina dari micro sampai mega-scale, dan diberi panggung.</p></div>
         </a>
       </div>
       <div class="epar" style="--h:430px;--o:66px">
-        <a class="ecard" href="{{ route('layanan') }}"><div class="eimg" data-bg="eco2"></div><span class="enum">02</span><span class="ego">↗</span>
-          <div class="ebody"><span class="etag">TikTok Affiliate Partner</span><div class="en">TAP System</div>
-            <p class="edesc">Matchmaking seller &amp; creator + product campaign, 6 kategori produk.</p></div>
+        <a class="ecard" href="{{ route('ekosistem') }}"><div class="eimg" data-bg="eco2"></div><span class="enum">02</span><span class="ego">↗</span>
+          <div class="ebody"><span class="etag">TikTok &middot; Top Creator</span><div class="en">VICTORY MEDIA</div>
+            <p class="edesc">Ekspansi kreator top &amp; kerjasama eksklusif.</p></div>
         </a>
       </div>
       <div class="epar" style="--h:400px;--o:26px">
-        <a class="ecard" href="{{ route('layanan') }}"><div class="eimg" data-bg="vobi-content"></div><span class="enum">03</span><span class="ego">↗</span>
-          <div class="ebody"><span class="etag">Content Creation</span><div class="en">SEAMEDIA</div>
-            <p class="edesc">Produksi konten &amp; live streaming untuk brand dan UMKM.</p></div>
+        <a class="ecard" href="{{ route('ekosistem') }}"><div class="eimg" data-bg="eco3"></div><span class="enum">03</span><span class="ego">↗</span>
+          <div class="ebody"><span class="etag">Shopee Affiliate</span><div class="en">UPMEDIA</div>
+            <p class="edesc">Inkubasi &amp; keberlangsungan affiliate Shopee.</p></div>
         </a>
       </div>
       <div class="epar" style="--h:468px;--o:100px">
-        <a class="ecard" href="{{ route('creator') }}"><div class="eimg" data-bg="vobi-web"></div><span class="enum">04</span><span class="ego">↗</span>
-          <div class="ebody"><span class="etag">Conversion Web</span><div class="en">SEAMEDIA</div>
-            <p class="edesc">Website profesional, katalog, &amp; landing page konversi tinggi untuk UMKM.</p></div>
+        <a class="ecard" href="{{ route('layanan') }}"><div class="eimg" data-bg="vobi-content"></div><span class="enum">04</span><span class="ego">↗</span>
+          <div class="ebody"><span class="etag">Content &amp; Conversion Web</span><div class="en">SEAMEDIA</div>
+            <p class="edesc">Produksi konten, live streaming, &amp; website konversi untuk UMKM.</p></div>
         </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PAPER: CARA GABUNG (light) -->
-<section class="paper" id="join">
-  <div class="wrap paper-grid">
-    <div class="shot rv" data-bg="story"></div>
-    <div>
-      <span class="eyebrow rv">Cara Gabung</span>
-      <h2 class="disp rv">Dari kenalan<br>sampai cuan.</h2>
-      <p class="lead rv">Tiga langkah. Simpel, transparan.</p>
-      <div class="steps st">
-        <div class="step"><div class="no flame">01</div><div><h3>Kenalan &amp; Strategi</h3></div></div>
-        <div class="step"><div class="no flame">02</div><div><h3>Eksekusi &amp; Produksi</h3></div></div>
-        <div class="step"><div class="no flame">03</div><div><h3>Tumbuh &amp; Skala</h3></div></div>
       </div>
     </div>
   </div>
