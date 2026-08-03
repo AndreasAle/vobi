@@ -10,9 +10,9 @@
 
 @include('partials.page-hero', [
     'title' => 'Cara Gabung',
-    'eyebrow' => 'Kolaborasi',
-    'heading' => 'Dari kenalan<br>sampai cuan.',
-    'lead' => 'Baik kamu kreator yang cari rumah, atau brand yang cari kreator — pintunya di sini.',
+    'eyebrow' => setting('gabung_eyebrow', 'Kolaborasi'),
+    'heading' => flame_text(setting('gabung_heading', 'Dari kenalan<br>sampai cuan.')),
+    'lead' => setting('gabung_lead', 'Baik kamu kreator yang cari rumah, atau brand yang cari kreator — pintunya di sini.'),
 ])
 
 <section id="form">
@@ -29,9 +29,9 @@
 
     <p class="prose rv" style="margin-bottom:30px">
       @if ($type === 'creator')
-        Isi data kamu dan ceritakan sedikit tentang konten yang kamu buat. Tim VOBI akan menghubungi untuk proses seleksi &amp; onboarding — <strong>non-seleb dan pemula sangat kami terima.</strong>
+        {!! flame_text(setting('gabung_creator_note', 'Isi data kamu dan ceritakan sedikit tentang konten yang kamu buat. Tim VOBI akan menghubungi untuk proses seleksi & onboarding — *non-seleb dan pemula sangat kami terima.*')) !!}
       @else
-        Ceritakan brand dan tujuan campaign kamu. Tim kami akan bantu carikan kreator yang paling pas, lengkap dengan estimasi harga &amp; SOW.
+        {{ setting('gabung_brand_note', 'Ceritakan brand dan tujuan campaign kamu. Tim kami akan bantu carikan kreator yang paling pas, lengkap dengan estimasi harga & SOW.') }}
       @endif
     </p>
 

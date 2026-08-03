@@ -8,9 +8,9 @@
 
 @include('partials.page-hero', [
     'title' => 'Kontak',
-    'eyebrow' => 'Contact Us',
-    'heading' => 'Mari tumbuh<br><span class="flame">bersama</span> kami.',
-    'lead' => 'Brand mencari kreator? Kreator mencari rumah? Ceritakan ke kami — konsultasi gratis.',
+    'eyebrow' => setting('kontak_eyebrow', 'Contact Us'),
+    'heading' => flame_text(setting('kontak_heading', 'Mari tumbuh<br>*bersama* kami.')),
+    'lead' => setting('kontak_lead', 'Brand mencari kreator? Kreator mencari rumah? Ceritakan ke kami — konsultasi gratis.'),
 ])
 
 <section id="form">
@@ -20,12 +20,12 @@
     <div class="rv">
       <span class="eyebrow">Info</span>
       <div style="margin-top:22px">
-        <div class="info-item"><div class="k">Kantor Pusat</div><div class="v">Perumahan Bakung Palace, Blk B No. 10,<br>Kec. Sako, Kota Palembang, Sumatera Selatan</div></div>
+        <div class="info-item"><div class="k">Kantor Pusat</div><div class="v">{!! nl2br(e(setting('kontak_address', "Perumahan Bakung Palace, Blk B No. 10,\nKec. Sako, Kota Palembang, Sumatera Selatan"))) !!}</div></div>
         <div class="info-item"><div class="k">WhatsApp &middot; VOBI MCN</div><div class="v"><a href="https://wa.me/6289519406185">0895-1940-6185 (Nadia)</a> &middot; <a href="https://wa.me/6285964424804">0859-6442-4804 (Selvi)</a></div></div>
         <div class="info-item"><div class="k">WhatsApp &middot; SEAMEDIA</div><div class="v"><a href="https://wa.me/6282185606658">0821-8560-6658 (Agung)</a> &middot; <a href="https://wa.me/6289675280180">0896-7528-0180 (Keyla)</a> &middot; <a href="https://wa.me/6282180682941">0821-8068-2941 (Adit)</a></div></div>
         <div class="info-item"><div class="k">Email</div><div class="v"><a href="mailto:seamediaindonesia&#64;gmail.com">seamediaindonesia&#64;gmail.com</a></div></div>
         <div class="info-item"><div class="k">Instagram</div><div class="v"><a href="https://www.instagram.com/vobi.id/" rel="noopener" target="_blank">&#64;vobi.id</a></div></div>
-        <div class="info-item"><div class="k">Jam Operasional</div><div class="v">Senin&ndash;Sabtu, 09.00&ndash;18.00 WIB</div></div>
+        <div class="info-item"><div class="k">Jam Operasional</div><div class="v">{{ setting('kontak_hours', 'Senin–Sabtu, 09.00–18.00 WIB') }}</div></div>
       </div>
     </div>
 

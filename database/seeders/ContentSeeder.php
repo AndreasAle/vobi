@@ -178,6 +178,20 @@ class ContentSeeder extends Seeder
             'lay_final_eyebrow' => 'Butuh Bantuan?',
             'lay_final_title' => 'Konsultasi *gratis* dulu.',
             'lay_final_text' => 'Ceritakan kebutuhanmu — tim kami bantu petakan paket yang paling pas.',
+
+            // ===== Kontak / Gabung / Blog =====
+            'kontak_eyebrow' => 'Contact Us',
+            'kontak_heading' => 'Mari tumbuh<br>*bersama* kami.',
+            'kontak_lead' => 'Brand mencari kreator? Kreator mencari rumah? Ceritakan ke kami — konsultasi gratis.',
+            'kontak_address' => "Perumahan Bakung Palace, Blk B No. 10,\nKec. Sako, Kota Palembang, Sumatera Selatan",
+            'kontak_hours' => 'Senin–Sabtu, 09.00–18.00 WIB',
+            'gabung_eyebrow' => 'Kolaborasi',
+            'gabung_heading' => 'Dari kenalan<br>sampai cuan.',
+            'gabung_lead' => 'Baik kamu kreator yang cari rumah, atau brand yang cari kreator — pintunya di sini.',
+            'gabung_creator_note' => 'Isi data kamu dan ceritakan sedikit tentang konten yang kamu buat. Tim VOBI akan menghubungi untuk proses seleksi & onboarding — *non-seleb dan pemula sangat kami terima.*',
+            'gabung_brand_note' => 'Ceritakan brand dan tujuan campaign kamu. Tim kami akan bantu carikan kreator yang paling pas, lengkap dengan estimasi harga & SOW.',
+            'blog_eyebrow' => 'Latest Blog',
+            'blog_heading' => 'Ilmu dari lapangan.',
         ];
     }
 }

@@ -26,8 +26,8 @@
 <header class="blog-head">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="{{ route('home') }}">Beranda</a><span class="sep">/</span><span>Blog</span></nav>
-    <span class="eyebrow">Latest Blog</span>
-    <h1 class="disp" style="font-size:clamp(2.4rem,6vw,4rem);margin:12px 0 0">Ilmu dari lapangan.</h1>
+    <span class="eyebrow">{{ setting('blog_eyebrow', 'Latest Blog') }}</span>
+    <h1 class="disp" style="font-size:clamp(2.4rem,6vw,4rem);margin:12px 0 0">{{ setting('blog_heading', 'Ilmu dari lapangan.') }}</h1>
 
     @if ($lead)
     <div class="trend-bar">
