@@ -42,7 +42,7 @@ class LeadResource extends Resource
                 ->schema([
                     Forms\Components\TextInput::make('name')->label('Nama')->disabled(),
                     Forms\Components\TextInput::make('type')->label('Tipe')->disabled()
-                        ->formatStateUsing(fn (?string $s) => static::$typeLabels[$s] ?? $s),
+                        ->formatStateUsing(fn (?string $state) => static::$typeLabels[$state] ?? $state),
                     Forms\Components\TextInput::make('email')->label('Email')->disabled(),
                     Forms\Components\TextInput::make('phone')->label('WhatsApp')->disabled(),
                     Forms\Components\TextInput::make('subject')->label('Subjek')->disabled()->columnSpanFull(),
@@ -63,13 +63,13 @@ class LeadResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('created_at')->label('Masuk')->dateTime('d M Y H:i')->sortable(),
                 Tables\Columns\TextColumn::make('type')->label('Tipe')->badge()
-                    ->formatStateUsing(fn (?string $s) => static::$typeLabels[$s] ?? $s),
+                    ->formatStateUsing(fn (?string $state) => static::$typeLabels[$state] ?? $state),
                 Tables\Columns\TextColumn::make('name')->label('Nama')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('subject')->label('Subjek')->limit(40)->searchable()->wrap(),
                 Tables\Columns\TextColumn::make('phone')->label('WhatsApp')->searchable(),
                 Tables\Columns\TextColumn::make('status')->label('Status')->badge()
-                    ->formatStateUsing(fn (?string $s) => static::$statusLabels[$s] ?? ($s ?: 'Baru'))
-                    ->color(fn (?string $s) => match ($s) {
+                    ->formatStateUsing(fn (?string $state) => static::$statusLabels[$state] ?? ($state ?: 'Baru'))
+                    ->color(fn (?string $state) => match ($state) {
                         'selesai' => 'success', 'diproses' => 'warning', default => 'gray',
                     }),
             ])
