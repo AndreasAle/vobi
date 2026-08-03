@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MarketplaceSeeder::class,   // kreator + campaign/paket
             PostSeeder::class,          // artikel blog
+            ContentSeeder::class,       // konten editable (settings) default
         ]);
     }
 }

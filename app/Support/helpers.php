@@ -37,6 +37,21 @@ if (! function_exists('setting_arr')) {
     }
 }
 
+if (! function_exists('flame_text')) {
+    /**
+     * Render teks judul editable: escape HTML, izinkan <br>, dan ubah *kata*
+     * menjadi span amber (.flame). Aman dari XSS.
+     */
+    function flame_text(?string $text): \Illuminate\Support\HtmlString
+    {
+        $safe = e((string) $text);
+        $safe = str_replace(['&lt;br&gt;', '&lt;br/&gt;', '&lt;br /&gt;'], '<br>', $safe);
+        $safe = preg_replace('/\*(.+?)\*/', '<span class="flame">$1</span>', $safe);
+
+        return new \Illuminate\Support\HtmlString($safe);
+    }
+}
+
 if (! function_exists('setting_img')) {
     /**
      * URL gambar dari setting (path upload) dengan fallback role/URL.
