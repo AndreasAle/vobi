@@ -47,6 +47,11 @@ class Creator extends Model
         return 'Rp ' . static::shortRupiah($this->price_from);
     }
 
+    public function getAvatarUrlAttribute(): string
+    {
+        return media_url($this->avatar, 'avatar');
+    }
+
     public static function shortNumber(int $n): string
     {
         if ($n >= 1_000_000) return rtrim(rtrim(number_format($n / 1_000_000, 1, ',', ''), '0'), ',') . 'M';

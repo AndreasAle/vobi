@@ -17,4 +17,9 @@ class Post extends Model
     {
         return 'slug';
     }
+
+    public function getImageUrlAttribute(): string
+    {
+        return media_url($this->image, 'blog1');
+    }
 }

@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admin default (untuk admin panel nanti) — hanya dibuat jika belum ada
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'admin@vobi.id'],
-            ['name' => 'VOBI Admin', 'password' => bcrypt('vobi-admin-2024')]
+            ['name' => 'VOBI Admin', 'password' => bcrypt('vobi-admin-2024'), 'is_admin' => true]
         );
 
         $this->call([
