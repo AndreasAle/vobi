@@ -34,7 +34,12 @@
         <article class="cmp2">
           <a class="cmp2-media" href="{{ route('campaign.show', $cm) }}" aria-label="Detail {{ $cm->title }}">
             <span class="cmp2-cat">{{ $cm->category }}</span>
-            <div class="img" style="background-image:url('{{ asset('images/'.$cm->image.'.webp') }}')"></div>
+            @if ($cm->days_left !== null)
+              <span class="cmp2-time @if($cm->days_left <= 5) soon @endif">
+                @if($cm->days_left <= 0) Berakhir hari ini @else Sisa {{ $cm->days_left }} hari @endif
+              </span>
+            @endif
+            <div class="img" style="background-image:url('{{ $cm->image_url }}')"></div>
             <span class="cmp2-pf">{{ $cm->performance }}</span>
           </a>
           <div class="cmp2-body">

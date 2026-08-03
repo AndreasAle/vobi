@@ -44,7 +44,7 @@
     <div class="mag-feat">
       @if ($lead)
       <a class="mtile mlead rv" href="{{ route('blog.show', $lead) }}">
-        <div class="img" style="background-image:url('{{ asset('images/'.$lead->image.'.webp') }}')"></div>
+        <div class="img" style="background-image:url('{{ $lead->image_url }}')"></div>
         <span class="cat">{{ $lead->category }}</span>
         <h2>{{ $lead->title }}</h2>
         <div class="meta">VOBI &middot; {{ $lead->read_min }} menit baca &middot; {{ optional($lead->published_at)->translatedFormat('d M Y') }}</div>
@@ -53,7 +53,7 @@
       <div class="mside">
         @foreach ($side as $p)
         <a class="mtile msmall rv" href="{{ route('blog.show', $p) }}">
-          <div class="img" style="background-image:url('{{ asset('images/'.$p->image.'.webp') }}')"></div>
+          <div class="img" style="background-image:url('{{ $p->image_url }}')"></div>
           <span class="cat">{{ $p->category }}</span>
           <h3>{{ $p->title }}</h3>
           <div class="meta">{{ $p->read_min }} menit baca</div>
@@ -71,7 +71,7 @@
       <div class="sec-head rv" style="margin-bottom:24px"><div><span class="eyebrow">Semua Artikel</span></div></div>
       @foreach ($posts as $p)
         <a class="mrow rv" href="{{ route('blog.show', $p) }}">
-          <div class="mthumb"><div class="img" style="background-image:url('{{ asset('images/'.$p->image.'.webp') }}')"></div></div>
+          <div class="mthumb"><div class="img" style="background-image:url('{{ $p->image_url }}')"></div></div>
           <div>
             <span class="cat">{{ $p->category }}</span>
             <h3>{{ $p->title }}</h3>

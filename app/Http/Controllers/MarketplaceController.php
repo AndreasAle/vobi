@@ -9,9 +9,9 @@ class MarketplaceController extends Controller
 {
     public function campaign(Campaign $campaign)
     {
-        abort_unless($campaign->is_active, 404);
+        abort_unless($campaign->is_live, 404);
 
-        $related = Campaign::where('is_active', true)
+        $related = Campaign::active()
             ->where('id', '!=', $campaign->id)
             ->latest()->take(3)->get();
 
@@ -39,7 +39,7 @@ class MarketplaceController extends Controller
 
     public function campaigns()
     {
-        $campaigns = Campaign::where('is_active', true)->latest()->get();
+        $campaigns = Campaign::active()->latest()->get();
         $cats = $campaigns->pluck('category')->unique()->sort()->values();
 
         return view('pages.campaign-index', compact('campaigns', 'cats'));

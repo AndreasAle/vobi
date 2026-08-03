@@ -11,12 +11,12 @@
 @endphp
 
 @push('head')
-<meta property="og:image" content="{{ asset('images/'.$campaign->image.'.webp') }}">
+<meta property="og:image" content="{{ $campaign->image_url }}">
 <script type="application/ld+json">@php
     echo json_encode([
         '@context' => 'https://schema.org', '@type' => 'Product',
         'name' => $campaign->title, 'description' => $campaign->subtitle,
-        'image' => asset('images/'.$campaign->image.'.webp'), 'brand' => ['@type' => 'Brand', 'name' => $campaign->creator_name],
+        'image' => $campaign->image_url, 'brand' => ['@type' => 'Brand', 'name' => $campaign->creator_name],
         'offers' => ['@type' => 'Offer', 'price' => $campaign->price, 'priceCurrency' => 'IDR', 'availability' => 'https://schema.org/InStock'],
     ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 @endphp</script>
@@ -46,6 +46,11 @@
         <span class="pkg-chip">{{ $campaign->creator_name }}</span>
         <span class="pkg-chip">{{ $campaign->service }}</span>
         <span class="pkg-chip good">{{ $campaign->performance }}</span>
+        @if($campaign->days_left !== null)
+          <span class="pkg-chip" style="border-color:rgba(217,138,68,.5);color:#d98a44">
+            @if($campaign->days_left <= 0) Berakhir hari ini @else Berakhir dalam {{ $campaign->days_left }} hari @endif
+          </span>
+        @endif
       </div>
       <div class="pkg-price"><span class="pv tnum">{{ $campaign->price_short }}</span><span class="pk">mulai dari</span></div>
       <div class="hero-cta" style="justify-content:flex-start">
@@ -54,7 +59,7 @@
       </div>
     </div>
     <div class="pkg-cover">
-      <div class="img" style="background-image:url('{{ asset('images/'.$campaign->image.'.webp') }}')"></div>
+      <div class="img" style="background-image:url('{{ $campaign->image_url }}')"></div>
     </div>
   </div>
 </section>
@@ -121,7 +126,7 @@
         <article class="cmp2" style="background:#fff;border-color:rgba(24,19,16,.1)">
           <a class="cmp2-media" href="{{ route('campaign.show', $cm) }}">
             <span class="cmp2-cat">{{ $cm->category }}</span>
-            <div class="img" style="background-image:url('{{ asset('images/'.$cm->image.'.webp') }}')"></div>
+            <div class="img" style="background-image:url('{{ $cm->image_url }}')"></div>
           </a>
           <div class="cmp2-body">
             <div class="cmp2-u" style="color:#8a7f73">{{ $cm->creator_name }}</div>
@@ -159,9 +164,8 @@
     <button class="mclose" data-close aria-label="Tutup">&times;</button>
     <h3>Ajukan Paket</h3>
     <p class="msub">Tertarik dengan <b>{{ $campaign->title }}</b>? Isi data singkat — tim kami yang lanjutkan.</p>
-    <form class="form" method="POST" action="{{ route('creator.ajak') }}">
+    <form class="form" method="POST" action="{{ route('campaign.apply', $campaign) }}">
       @csrf
-      <input type="hidden" name="creator" value="Paket: {{ $campaign->title }}">
       <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="field @error('name') bad @enderror"><label>Nama <span class="req">*</span></label><input type="text" name="name" value="{{ old('name') }}" placeholder="Nama kamu" required>@error('name')<div class="err">{{ $message }}</div>@enderror</div>
       <div class="field"><label>Brand / Perusahaan</label><input type="text" name="brand" value="{{ old('brand') }}" placeholder="Nama brand (opsional)"></div>
@@ -188,7 +192,7 @@
   document.querySelectorAll('.js-ajak').forEach(function(b){ b.addEventListener('click', open); });
   modal.querySelectorAll('[data-close]').forEach(function(x){ x.addEventListener('click', close); });
   document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
-  @if($errors->any() && old('creator'))
+  @if($errors->any() && old('name'))
     open();
   @endif
 })();

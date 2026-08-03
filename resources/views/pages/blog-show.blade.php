@@ -7,14 +7,14 @@
 
 @push('head')
 <meta property="og:type" content="article">
-<meta property="og:image" content="{{ asset('images/'.$post->image.'.webp') }}">
+<meta property="og:image" content="{{ $post->image_url }}">
 <script type="application/ld+json">@php
     echo json_encode([
         '@context' => 'https://schema.org',
         '@type' => 'BlogPosting',
         'headline' => $post->title,
         'description' => $post->excerpt,
-        'image' => asset('images/'.$post->image.'.webp'),
+        'image' => $post->image_url,
         'datePublished' => optional($post->published_at)->toIso8601String(),
         'author' => ['@type' => 'Organization', 'name' => 'VOBI Group'],
         'publisher' => ['@type' => 'Organization', 'name' => 'VOBI Group'],
@@ -43,7 +43,7 @@
       <div class="cat">{{ $post->category }}</div>
       <h1 class="disp">{{ $post->title }}</h1>
       <div class="article-meta">{{ $post->read_min }} menit baca &middot; {{ optional($post->published_at)->translatedFormat('d F Y') }} &middot; VOBI Group</div>
-      <div class="article-cover" style="background-image:url('{{ asset('images/'.$post->image.'.webp') }}')"></div>
+      <div class="article-cover" style="background-image:url('{{ $post->image_url }}')"></div>
     </div>
   </header>
 
@@ -67,7 +67,7 @@
     <div class="related st">
       @foreach ($related as $r)
         <a class="bcard" href="{{ route('blog.show', $r) }}">
-          <div class="bthumb"><div class="img" style="background-image:url('{{ asset('images/'.$r->image.'.webp') }}')"></div></div>
+          <div class="bthumb"><div class="img" style="background-image:url('{{ $r->image_url }}')"></div></div>
           <div class="bbody"><span class="cat">{{ $r->category }}</span><h3>{{ $r->title }}</h3><span class="rd">{{ $r->read_min }} menit baca</span></div>
         </a>
       @endforeach

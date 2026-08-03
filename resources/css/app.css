@@ -1009,6 +1009,8 @@ main{display:block}
 .cmp2-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,5,4,.05),rgba(7,5,4,.42))}
 .cmp2-cat{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--serif);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(20,17,16,.55);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 11px;border-radius:999px}
 .cmp2-pf{position:absolute;bottom:12px;right:12px;z-index:2;font-family:var(--disp);font-weight:800;font-size:.82rem;color:var(--good)}
+.cmp2-time{position:absolute;top:12px;right:12px;z-index:2;font-family:var(--serif);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:#e9e2d6;background:rgba(20,17,16,.55);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 10px;border-radius:999px}
+.cmp2-time.soon{color:#ffd9b0;border-color:rgba(217,138,68,.5);background:rgba(120,60,20,.4)}
 .cmp2-body{padding:18px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
 .cmp2-u{font-family:var(--serif);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--f3)}
 .cmp2-body h3{font-family:var(--disp);font-weight:800;font-size:1.28rem;margin:0;letter-spacing:-.01em;line-height:1.05}

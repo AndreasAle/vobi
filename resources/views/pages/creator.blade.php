@@ -39,7 +39,7 @@
             'cat' => $c->category, 'platform' => $c->platform, 'city' => $c->city,
             'followers' => $c->followers_short, 'eng' => number_format($c->engagement_rate, 1, ',', '') . '%',
             'gmv' => $c->gmv_short, 'price' => $c->price_short,
-            'avatar' => asset('images/' . $c->avatar . '.webp'),
+            'avatar' => $c->avatar_url,
             'trend' => $trend, 'growth' => $growth,
         ]];
     });
@@ -63,7 +63,7 @@
       <div><span class="eyebrow">Kreator Unggulan</span><h2 class="disp">Talent pilihan.</h2></div>
       <a class="avstack" href="#daftar" aria-label="Lihat semua kreator lainnya">
         @foreach ($others->take(3) as $o)
-          <span class="a" style="background-image:url('{{ asset('images/'.$o->avatar.'.webp') }}')"></span>
+          <span class="a" style="background-image:url('{{ $o->avatar_url }}')"></span>
         @endforeach
         <span class="more">@if($others->count() > 3)+{{ $others->count()-3 }}@else&rarr;@endif</span>
         <span class="cap">kreator lainnya</span>
@@ -80,7 +80,7 @@
           <div class="fm" data-detail="{{ $cr->id }}" role="button" tabindex="0" aria-label="Detail {{ $cr->name }}">
             <span class="rib">&#9733; Unggulan</span>
             <span class="rt">{{ $cr->tier }}</span>
-            <div class="fi" style="background-image:url('{{ asset('images/'.$cr->avatar.'.webp') }}')"></div>
+            <div class="fi" style="background-image:url('{{ $cr->avatar_url }}')"></div>
             <div class="fnm"><div class="n">{{ $cr->name }}</div><div class="h">{{ $cr->handle }} &middot; {{ $cr->category }}</div></div>
           </div>
           <div class="fb">
@@ -136,7 +136,7 @@
              data-category="{{ $cr->category }}"
              data-tier="{{ $cr->tier }}">
           <div class="crx-cr" data-detail="{{ $cr->id }}" role="button" tabindex="0" aria-label="Detail {{ $cr->name }}">
-            <div class="crx-av" style="background-image:url('{{ asset('images/'.$cr->avatar.'.webp') }}')"></div>
+            <div class="crx-av" style="background-image:url('{{ $cr->avatar_url }}')"></div>
             <div style="min-width:0">
               <div class="nm">{{ $cr->name }} <span class="tier">{{ $cr->tier }}</span></div>
               <div class="hd">{{ $cr->handle }} &middot; {{ $cr->category }} &middot; {{ $cr->city }}</div>

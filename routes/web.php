@@ -11,6 +11,7 @@ Route::view('/layanan', 'pages.layanan')->name('layanan');
 Route::get('/creator', [MarketplaceController::class, 'index'])->name('creator');
 Route::get('/campaign', [MarketplaceController::class, 'campaigns'])->name('campaign');
 Route::get('/campaign/{campaign}', [MarketplaceController::class, 'campaign'])->name('campaign.show');
+Route::post('/campaign/{campaign}/ajukan', [LeadController::class, 'campaign'])->name('campaign.apply');
 Route::post('/creator/ajak', [LeadController::class, 'marketplace'])->name('creator.ajak');
 Route::redirect('/marketplace', '/creator');
 Route::redirect('/paket', '/campaign');
@@ -32,7 +33,7 @@ Route::get('/sitemap.xml', function () {
         'priority' => $r === 'home' ? '1.0' : '0.8',
     ]);
 
-    foreach (\App\Models\Campaign::where('is_active', true)->get() as $c) {
+    foreach (\App\Models\Campaign::active()->get() as $c) {
         $urls->push(['loc' => route('campaign.show', $c), 'priority' => '0.7']);
     }
     foreach (\App\Models\Post::where('is_published', true)->get() as $post) {

@@ -1,6 +1,45 @@
 <?php
 
+use App\Mail\LeadReceived;
+use App\Models\Campaign;
+use App\Models\Lead;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+
+if (! function_exists('lead_recipient')) {
+    /**
+     * Email tujuan notifikasi lead. Prioritas: setting('mail_to') (Fase C) ->
+     * env MAIL_TO -> alamat pengirim default.
+     */
+    function lead_recipient(): ?string
+    {
+        if (function_exists('setting')) {
+            $s = setting('mail_to');
+            if (filled($s)) return $s;
+        }
+
+        return env('MAIL_TO') ?: config('mail.from.address');
+    }
+}
+
+if (! function_exists('notify_lead')) {
+    /**
+     * Kirim notifikasi lead ke email admin. Aman: gagal kirim tidak
+     * menggagalkan submit form (lead sudah tersimpan di DB).
+     */
+    function notify_lead(Lead $lead, ?Campaign $campaign = null): void
+    {
+        $to = lead_recipient();
+        if (blank($to)) return;
+
+        try {
+            Mail::to($to)->send(new LeadReceived($lead, $campaign));
+        } catch (\Throwable $e) {
+            Log::warning('Gagal kirim email lead: ' . $e->getMessage(), ['lead_id' => $lead->id]);
+        }
+    }
+}
 
 if (! function_exists('media_url')) {
     /**
