@@ -43,6 +43,13 @@
         ['q' => 'Platform apa saja yang didukung?', 'a' => 'TikTok, Shopee, Lazada, dan YouTube — lewat unit VOBI, Victory Media, dan Upmedia.'],
         ['q' => 'VOBI beroperasi di kota mana?', 'a' => 'Palembang, Jakarta, Bandung, Jogja, Bali, Lampung, dan Jambi — dan terus berkembang.'],
     ]);
+
+    // Kreator unggulan untuk fan-cards marketplace (real data)
+    $fan = \App\Models\Creator::where('is_active', true)
+        ->orderByDesc('is_featured')->orderByDesc('gmv_3m')->take(3)->get();
+    $fanCenter = $fan->get(0);
+    $fanLeft = $fan->get(1);
+    $fanRight = $fan->get(2);
 @endphp
 
 @section('body')
@@ -110,14 +117,14 @@
     <div class="stats st">
       <div class="stat feat"><span class="tick">/ 01</span>
         <svg class="spark" width="120" height="40" viewBox="0 0 120 40" fill="none"><polyline points="0,34 20,28 40,30 60,18 80,20 100,8 120,4" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg" x1="0" y1="0" x2="120" y2="0"><stop stop-color="#D98A44"/><stop offset="1" stop-color="#E2C186"/></linearGradient></defs></svg>
-        <div class="n tnum flame" data-pre="Rp " data-c="600" data-suf="Jt">0</div><div class="l">GMV per Sesi Live (talent terbaik)</div></div>
+        <div class="n tnum flame" data-pre="Rp " data-c="{{ setting('home_perf_s1_val', '600') }}" data-suf="Jt">0</div><div class="l">{{ setting('home_perf_s1_label', 'GMV per Sesi Live (talent terbaik)') }}</div></div>
       <div class="stat tall"><span class="tick">/ 02</span>
         <svg class="ring" width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" stroke="rgba(255,255,255,.12)" stroke-width="3" fill="none"/><circle cx="23" cy="23" r="19" stroke="var(--f2)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="119" stroke-dashoffset="26" transform="rotate(-90 23 23)"/></svg>
-        <div class="n tnum chrome" data-c="4600" data-suf="+">0</div><div class="l">Talent &amp; Creator</div></div>
-      <div class="stat"><span class="tick">/ 03</span><div class="n tnum chrome" data-c="800" data-suf="+">0</div><div class="l">Brand &amp; Seller Partner</div></div>
-      <div class="stat"><span class="tick">/ 04</span><div class="n tnum chrome" data-c="2000" data-suf="+">0</div><div class="l">Product Collaboration</div></div>
-      <div class="stat wimg wide"><div class="bgimg" data-bg="vobi-beauty"></div><span class="tick">/ 05</span><div class="n tnum chrome" data-c="6" data-suf="">0</div><div class="l">Kategori Produk · Beauty, Fashion, F&amp;B, Home Living, Mom &amp; Baby, Electronic</div></div>
-      <div class="stat wide"><span class="tick">/ 06</span><div class="n chrome">Official Partner</div><div class="l">TikTok · Shopee · Tokopedia</div></div>
+        <div class="n tnum chrome" data-c="{{ setting('home_perf_s2_val', '4600') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s2_label', 'Talent & Creator') }}</div></div>
+      <div class="stat"><span class="tick">/ 03</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s3_val', '800') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s3_label', 'Brand & Seller Partner') }}</div></div>
+      <div class="stat"><span class="tick">/ 04</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s4_val', '2000') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s4_label', 'Product Collaboration') }}</div></div>
+      <div class="stat wimg wide"><div class="bgimg" data-bg="vobi-beauty"></div><span class="tick">/ 05</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s5_val', '6') }}" data-suf="">0</div><div class="l">{{ setting('home_perf_s5_label', 'Kategori Produk · Beauty, Fashion, F&B, Home Living, Mom & Baby, Electronic') }}</div></div>
+      <div class="stat wide"><span class="tick">/ 06</span><div class="n chrome">{{ setting('home_perf_s6_title', 'Official Partner') }}</div><div class="l">{{ setting('home_perf_s6_label', 'TikTok · Shopee · Tokopedia') }}</div></div>
     </div>
   </div>
 </section>
@@ -162,34 +169,28 @@
 <section id="mkt">
   <div class="wrap">
     <div class="mkt-head rv"><h2>{!! flame_text(setting('home_mkt_title', 'Campaign *Marketplace*')) !!}</h2></div>
+    @if ($fanCenter)
     <div class="fanreveal rv">
       <div class="fan">
-        <div class="slot left"><div class="vcard">
-          <video data-vid="card3" autoplay muted loop playsinline preload="auto"></video>
-          <div class="badge2">Mid</div>
-          <div class="vinfo"><div class="nm">Bagas Prawira</div><div class="ni">Tech · Gadget</div>
-            <div class="gmv"><span class="v tnum">Rp 52Jt</span><span class="k">GMV / 3bln</span></div></div>
-        </div></div>
-        <div class="slot right"><div class="vcard">
-          <video data-vid="card2" autoplay muted loop playsinline preload="auto"></video>
-          <div class="badge2">Macro</div>
-          <div class="vinfo"><div class="nm">Damar Aji</div><div class="ni">Lifestyle · Fashion</div>
-            <div class="gmv"><span class="v tnum">Rp 96Jt</span><span class="k">GMV / 3bln</span></div></div>
-        </div></div>
-        <div class="slot center"><div class="vcard">
-          <video data-vid="card1" autoplay muted loop playsinline preload="auto"></video>
-          <div class="badge2">Macro</div>
-          <div class="vinfo"><div class="nm">Rangga Satria</div><div class="ni">Beauty · Skincare</div>
-            <div class="gmv"><span class="v tnum">Rp 84Jt</span><span class="k">GMV / 3bln</span></div></div>
-        </div></div>
-        <div class="fchip a"><div class="v tnum">312K</div><div class="k">Followers</div></div>
-        <div class="fchip b"><div class="v up tnum">↑ 5,8%</div><div class="k">Eng. Rate</div></div>
+        @foreach (['left' => $fanLeft, 'right' => $fanRight, 'center' => $fanCenter] as $pos => $cr)
+          @if ($cr)
+            <a class="slot {{ $pos }}" href="{{ route('creator') }}"><div class="vcard">
+              <div class="vmedia" style="background-image:url('{{ $cr->avatar_url }}')"></div>
+              <div class="badge2">{{ $cr->tier }}</div>
+              <div class="vinfo"><div class="nm">{{ $cr->name }}</div><div class="ni">{{ $cr->category }} · {{ $cr->platform }}</div>
+                <div class="gmv"><span class="v tnum">{{ $cr->gmv_short }}</span><span class="k">GMV / 3bln</span></div></div>
+            </div></a>
+          @endif
+        @endforeach
+        <div class="fchip a"><div class="v tnum">{{ $fanCenter->followers_short }}</div><div class="k">Followers</div></div>
+        <div class="fchip b"><div class="v up tnum">↑ {{ number_format($fanCenter->engagement_rate, 1, ',', '') }}%</div><div class="k">Eng. Rate</div></div>
         <div class="fchip c">
           <svg width="52" height="26" viewBox="0 0 52 26" fill="none"><polyline points="0,22 12,16 22,18 32,9 42,11 52,3" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div><div class="v up tnum">3,1×</div><div class="k">ROI</div></div>
+          <div><div class="v up tnum">{{ $fanCenter->tier }}</div><div class="k">Tier</div></div>
         </div>
       </div>
     </div>
+    @endif
     <div class="mkt-cta rv"><a class="btn solid" href="{{ route('creator') }}"><span>Jelajahi Katalog →</span></a></div>
   </div>
 </section>
