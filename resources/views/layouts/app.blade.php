@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#0C0A09">
 
     {{-- ===== SEO: Primary ===== --}}
-    <title>@yield('title', 'VOBI — Talent Agency & Creator Economy untuk Brand & Kreator')</title>
-    <meta name="description" content="@yield('meta_description', 'VOBI Group: talent agency & creator economy untuk brand dan kreator. Affiliate TikTok & Shopee, produksi konten, live streaming, dan Campaign Marketplace. 12.000+ kreator aktif di 7 kota.')">
+    <title>@yield('title', setting('seo_title', 'VOBI — Talent Agency & Creator Economy untuk Brand & Kreator'))</title>
+    <meta name="description" content="@yield('meta_description', setting('seo_description', 'VOBI Group: talent agency & creator economy untuk brand dan kreator. Affiliate TikTok & Shopee, produksi konten, live streaming, dan Campaign Marketplace. 12.000+ kreator aktif di 7 kota.'))">
     <meta name="keywords" content="@yield('meta_keywords', 'VOBI, talent agency, creator economy, MCN TikTok, affiliate Shopee, campaign marketplace, jasa kreator, influencer marketing Indonesia, live streaming, produksi konten')">
     <meta name="author" content="VOBI Group">
     <meta name="robots" content="index, follow, max-image-preview:large">
@@ -20,13 +20,13 @@
     <meta property="og:title" content="@yield('og_title', 'VOBI — Rumah Brand & Kreator Bertumbuh Bersama')">
     <meta property="og:description" content="@yield('og_description', 'Talent agency & creator economy: affiliate, produksi konten, live streaming, dan Campaign Marketplace. Satu ekosistem, dampak nyata.')">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('images/eco1.webp') }}">
+    <meta property="og:image" content="{{ setting_img('seo_og_image', 'eco1') }}">
 
     {{-- ===== SEO: Twitter ===== --}}
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="@yield('og_title', 'VOBI — Rumah Brand & Kreator Bertumbuh Bersama')">
     <meta name="twitter:description" content="@yield('og_description', 'Talent agency & creator economy untuk brand dan kreator.')">
-    <meta name="twitter:image" content="{{ asset('images/eco1.webp') }}">
+    <meta name="twitter:image" content="{{ setting_img('seo_og_image', 'eco1') }}">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%8B%3C/text%3E%3C/svg%3E">
 

@@ -3,9 +3,51 @@
 use App\Mail\LeadReceived;
 use App\Models\Campaign;
 use App\Models\Lead;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+
+if (! function_exists('setting')) {
+    /**
+     * Ambil setting teks. Kembalikan $default (teks hardcoded sekarang) bila kosong,
+     * sehingga tampilan tidak pecah walau belum di-seed / diisi admin.
+     */
+    function setting(string $key, $default = null)
+    {
+        $v = Setting::get($key);
+
+        return ($v === null || $v === '') ? $default : $v;
+    }
+}
+
+if (! function_exists('setting_arr')) {
+    /**
+     * Ambil setting berupa list (JSON). Kembalikan $default bila kosong/invalid.
+     */
+    function setting_arr(string $key, array $default = []): array
+    {
+        $v = Setting::get($key);
+        if (blank($v)) return $default;
+        if (is_array($v)) return $v;
+
+        $decoded = json_decode($v, true);
+
+        return is_array($decoded) ? $decoded : $default;
+    }
+}
+
+if (! function_exists('setting_img')) {
+    /**
+     * URL gambar dari setting (path upload) dengan fallback role/URL.
+     */
+    function setting_img(string $key, ?string $fallback = null): string
+    {
+        $v = Setting::get($key);
+
+        return blank($v) ? ($fallback ? media_url($fallback) : '') : media_url($v);
+    }
+}
 
 if (! function_exists('lead_recipient')) {
     /**

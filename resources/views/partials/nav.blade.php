@@ -11,7 +11,7 @@
       <a href="{{ route('campaign') }}" @class(['active' => request()->routeIs('campaign*')])>Campaign</a>
       <a href="{{ route('blog') }}" @class(['active' => request()->routeIs('blog*')])>Blog</a>
     </nav>
-    <a class="btn solid nav-cta" href="{{ route('kontak') }}"><span>Konsultasi →</span></a>
+    <a class="btn solid nav-cta" href="{{ route('kontak') }}"><span>{{ setting('nav_cta_label', 'Konsultasi →') }}</span></a>
     <button class="nav-burger" id="navBurger" aria-label="Buka menu" aria-expanded="false" aria-controls="navDrawer">
       <span></span><span></span><span></span>
     </button>
@@ -25,6 +25,6 @@
     <a href="{{ route('creator') }}">Creator</a>
     <a href="{{ route('campaign') }}">Campaign</a>
     <a href="{{ route('blog') }}">Blog</a>
-    <a class="btn solid" href="{{ route('kontak') }}"><span>Konsultasi &rarr;</span></a>
+    <a class="btn solid" href="{{ route('kontak') }}"><span>{{ setting('nav_cta_label', 'Konsultasi →') }}</span></a>
   </nav>
 </div>
