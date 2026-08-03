@@ -17,6 +17,37 @@
 @endphp</script>
 @endpush
 
+@php
+    // Ikon medali (SVG) tetap per urutan; teks stop editable dari admin.
+    $medals = [
+        '<path d="M40 100 L100 48 L160 100"/><path d="M55 90 V152 H145 V90"/><path d="M86 152 V116 H114 V152"/>',
+        '<rect x="80" y="38" width="40" height="72" rx="20"/><path d="M58 96 a42 42 0 0 0 84 0"/><line x1="100" y1="138" x2="100" y2="162"/><line x1="78" y1="162" x2="122" y2="162"/>',
+        '<path d="M92 70 H62 a30 30 0 0 0 0 60 h30"/><path d="M108 70 h30 a30 30 0 0 1 0 60 h-30"/><line x1="74" y1="100" x2="126" y2="100"/>',
+        '<circle cx="100" cy="64" r="22"/><path d="M62 150 a38 38 0 0 1 76 0"/><circle cx="48" cy="86" r="15"/><path d="M22 148 a28 28 0 0 1 28 -22"/><circle cx="152" cy="86" r="15"/><path d="M178 148 a28 28 0 0 0 -28 -22"/>',
+        '<rect x="34" y="48" width="132" height="92" rx="10"/><line x1="34" y1="72" x2="166" y2="72"/><circle cx="48" cy="60" r="3"/><line x1="80" y1="162" x2="120" y2="162"/><line x1="100" y1="140" x2="100" y2="162"/>',
+    ];
+    $ekoStops = setting_arr('eko_stops', [
+        ['city' => 'Filosofi', 'lh' => 'Makna *HOME*.', 'ld' => 'Tempat kita berangkat dan kembali — tempat diterima, didengar, dan tumbuh bersama.'],
+        ['city' => 'VOBI MCN', 'lh' => 'Rumah *talent*.', 'ld' => '600+ talent dibina dari micro sampai mega-scale — jadi kreator yang profesional & menghibur.'],
+        ['city' => 'TAP System', 'lh' => 'Menjodohkan *seller* & kreator.', 'ld' => 'TikTok Affiliate Partner: matchmaking + product campaign, 6 kategori. Komisi di atas rata-rata.'],
+        ['city' => 'VOBI Family', 'lh' => 'Rasa *memiliki*.', 'ld' => 'Sense of belonging & komunikasi jadi fondasi partnership yang sukses — ekosistem yang nyaman.'],
+        ['city' => 'SEAMEDIA', 'lh' => 'Dari konten ke *konversi*.', 'ld' => 'Professional partner untuk digital journey: produksi konten, live, sampai website konversi untuk UMKM.'],
+    ]);
+    $ekoStats = setting_arr('eko_finale_stats', [
+        ['value' => '600', 'suffix' => '+', 'label' => 'Talent'],
+        ['value' => '4.000', 'suffix' => '+', 'label' => 'Creator'],
+        ['value' => '800', 'suffix' => '+', 'label' => 'Brand/Seller'],
+        ['value' => '2.000', 'suffix' => '+', 'label' => 'Collaboration'],
+    ]);
+    $ekoUnits = setting_arr('eko_units', [
+        ['uf' => 'Talent & MCN', 'un' => 'VOBI MCN', 'url' => route('gabung')],
+        ['uf' => 'TikTok Affiliate', 'un' => 'TAP System', 'url' => route('layanan')],
+        ['uf' => 'Content Creation', 'un' => 'SEAMEDIA', 'url' => route('layanan')],
+        ['uf' => 'Website', 'un' => 'Conversion Web', 'url' => route('creator')],
+    ]);
+    $ekoValues = setting_arr('eko_values', ['Honesty', 'Trust', 'Togetherness', 'Growth', 'Convenience']);
+@endphp
+
 @section('body')
 
 <section class="jrny">
@@ -25,9 +56,9 @@
   </nav>
 
   <div class="intro" style="text-align:center;max-width:820px;margin:0 auto;padding:0 24px">
-    <span class="welcome">A Home Change Everything</span>
-    <h2 class="big">VOBI adalah<br><span class="hl">rumah.</span></h2>
-    <p class="sub">Di rumah, kami menemukan kejujuran, kepercayaan, kebersamaan, dan niat untuk saling membangun. Scroll pelan &mdash; ikuti perjalanannya.</p>
+    <span class="welcome">{{ setting('eko_welcome', 'A Home Change Everything') }}</span>
+    <h2 class="big">{!! flame_text(setting('eko_title', 'VOBI adalah<br>*rumah.*')) !!}</h2>
+    <p class="sub">{{ setting('eko_sub', 'Di rumah, kami menemukan kejujuran, kepercayaan, kebersamaan, dan niat untuk saling membangun. Scroll pelan — ikuti perjalanannya.') }}</p>
   </div>
 
   <div class="route3" id="route3">
@@ -35,71 +66,27 @@
     <div class="jmarker" aria-hidden="true"></div>
 
     <div class="stops">
-      {{-- HOME philosophy --}}
-      <article class="stop">
-        <div class="node"></div>
-        <div class="medal">
-          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Filosofi HOME">
-            <path d="M40 100 L100 48 L160 100"/><path d="M55 90 V152 H145 V90"/><path d="M86 152 V116 H114 V152"/>
-          </svg>
-        </div>
-        <div class="info"><span class="idx">01</span><div class="city">Filosofi</div><div class="lh">Makna <em>HOME</em>.</div><p class="ld">Tempat kita berangkat dan kembali &mdash; tempat diterima, didengar, dan tumbuh bersama.</p></div>
-      </article>
-
-      {{-- VOBI MCN --}}
-      <article class="stop">
-        <div class="node"></div>
-        <div class="medal">
-          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="VOBI MCN">
-            <rect x="80" y="38" width="40" height="72" rx="20"/><path d="M58 96 a42 42 0 0 0 84 0"/><line x1="100" y1="138" x2="100" y2="162"/><line x1="78" y1="162" x2="122" y2="162"/>
-          </svg>
-        </div>
-        <div class="info"><span class="idx">02</span><div class="city">VOBI MCN</div><div class="lh">Rumah <em>talent</em>.</div><p class="ld">600+ talent dibina dari micro sampai mega-scale &mdash; jadi kreator yang profesional &amp; menghibur.</p></div>
-      </article>
-
-      {{-- TAP System --}}
-      <article class="stop">
-        <div class="node"></div>
-        <div class="medal">
-          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="TAP System">
-            <path d="M92 70 H62 a30 30 0 0 0 0 60 h30"/><path d="M108 70 h30 a30 30 0 0 1 0 60 h-30"/><line x1="74" y1="100" x2="126" y2="100"/>
-          </svg>
-        </div>
-        <div class="info"><span class="idx">03</span><div class="city">TAP System</div><div class="lh">Menjodohkan <em>seller</em> &amp; kreator.</div><p class="ld">TikTok Affiliate Partner: matchmaking + product campaign, 6 kategori. Komisi di atas rata-rata.</p></div>
-      </article>
-
-      {{-- VOBI Family --}}
-      <article class="stop">
-        <div class="node"></div>
-        <div class="medal">
-          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="VOBI Family">
-            <circle cx="100" cy="64" r="22"/><path d="M62 150 a38 38 0 0 1 76 0"/><circle cx="48" cy="86" r="15"/><path d="M22 148 a28 28 0 0 1 28 -22"/><circle cx="152" cy="86" r="15"/><path d="M178 148 a28 28 0 0 0 -28 -22"/>
-          </svg>
-        </div>
-        <div class="info"><span class="idx">04</span><div class="city">VOBI Family</div><div class="lh">Rasa <em>memiliki</em>.</div><p class="ld">Sense of belonging &amp; komunikasi jadi fondasi partnership yang sukses &mdash; ekosistem yang nyaman.</p></div>
-      </article>
-
-      {{-- SEAMEDIA --}}
-      <article class="stop">
-        <div class="node"></div>
-        <div class="medal">
-          <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="SEAMEDIA">
-            <rect x="34" y="48" width="132" height="92" rx="10"/><line x1="34" y1="72" x2="166" y2="72"/><circle cx="48" cy="60" r="3"/><line x1="80" y1="162" x2="120" y2="162"/><line x1="100" y1="140" x2="100" y2="162"/>
-          </svg>
-        </div>
-        <div class="info"><span class="idx">05</span><div class="city">SEAMEDIA</div><div class="lh">Dari konten ke <em>konversi</em>.</div><p class="ld">Professional partner untuk digital journey: produksi konten, live, sampai website konversi untuk UMKM.</p></div>
-      </article>
+      @foreach ($ekoStops as $i => $stop)
+        <article class="stop">
+          <div class="node"></div>
+          <div class="medal">
+            <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="{{ $stop['city'] ?? '' }}">
+              {!! $medals[$i] ?? $medals[0] !!}
+            </svg>
+          </div>
+          <div class="info"><span class="idx">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</span><div class="city">{{ $stop['city'] ?? '' }}</div><div class="lh">{!! flame_text($stop['lh'] ?? '') !!}</div><p class="ld">{{ $stop['ld'] ?? '' }}</p></div>
+        </article>
+      @endforeach
     </div>
 
     {{-- Finale --}}
     <div class="jfin" id="jfin">
-      <div class="city" style="text-align:center;color:#8a7f73;font-family:var(--serif);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase">Berbasis di Palembang &middot; Official Partner</div>
-      <div class="lh" style="margin-top:10px">&hellip;dan terus <span class="hl">bertumbuh.</span></div>
+      <div class="city" style="text-align:center;color:#8a7f73;font-family:var(--serif);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase">{{ setting('eko_finale_kicker', 'Berbasis di Palembang · Official Partner') }}</div>
+      <div class="lh" style="margin-top:10px">{!! flame_text(setting('eko_finale_line', '…dan terus *bertumbuh.*')) !!}</div>
       <div class="jfin-nums">
-        <div><div class="v"><em>600</em>+</div><div class="k">Talent</div></div>
-        <div><div class="v"><em>4.000</em>+</div><div class="k">Creator</div></div>
-        <div><div class="v"><em>800</em>+</div><div class="k">Brand/Seller</div></div>
-        <div><div class="v"><em>2.000</em>+</div><div class="k">Collaboration</div></div>
+        @foreach ($ekoStats as $stat)
+          <div><div class="v"><em>{{ $stat['value'] ?? '' }}</em>{{ $stat['suffix'] ?? '' }}</div><div class="k">{{ $stat['label'] ?? '' }}</div></div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -110,10 +97,9 @@
   <div class="wrap">
     <span class="eyebrow">Ekosistem</span>
     <div class="units-line">
-      <a class="unit-cell" href="{{ route('gabung') }}"><div class="uf">Talent &amp; MCN</div><div class="un">VOBI MCN</div></a>
-      <a class="unit-cell" href="{{ route('layanan') }}"><div class="uf">TikTok Affiliate</div><div class="un">TAP System</div></a>
-      <a class="unit-cell" href="{{ route('layanan') }}"><div class="uf">Content Creation</div><div class="un">SEAMEDIA</div></a>
-      <a class="unit-cell" href="{{ route('creator') }}"><div class="uf">Website</div><div class="un">Conversion Web</div></a>
+      @foreach ($ekoUnits as $u)
+        <a class="unit-cell" href="{{ $u['url'] ?? route('layanan') }}"><div class="uf">{{ $u['uf'] ?? '' }}</div><div class="un">{{ $u['un'] ?? '' }}</div></a>
+      @endforeach
     </div>
   </div>
 </section>
@@ -122,11 +108,9 @@
 <section style="padding:76px 0">
   <div class="wrap" style="margin-bottom:14px"><span class="eyebrow" style="justify-content:center;width:100%">VOBI Spirit</span></div>
   <div class="vmarq"><div class="vtrack" id="vtrack">
-    <span class="vw fill">Honesty</span><span class="vstar"></span>
-    <span class="vw">Trust</span><span class="vstar"></span>
-    <span class="vw fill">Togetherness</span><span class="vstar"></span>
-    <span class="vw">Growth</span><span class="vstar"></span>
-    <span class="vw fill">Convenience</span><span class="vstar"></span>
+    @foreach ($ekoValues as $i => $val)
+      <span class="vw {{ $i % 2 === 0 ? 'fill' : '' }}">{{ $val }}</span><span class="vstar"></span>
+    @endforeach
   </div></div>
 </section>
 
@@ -135,7 +119,7 @@
   <div class="wrap" style="max-width:820px;margin:0 auto;text-align:center">
     <span class="eyebrow rv" style="justify-content:center">VOBI Listening Strategy</span>
     <p class="rv" style="font-family:var(--serif);font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.5;color:var(--ink);margin-top:20px;text-wrap:balance">
-      &ldquo;Kami <span class="flame">mendengar</span> lebih dulu &mdash; menangkap input yang relevan, merespons pasar lebih efisien, dan membangun koneksi baik dengan kreator &amp; klien.&rdquo;
+      {!! flame_text(setting('eko_listening_quote', '“Kami *mendengar* lebih dulu — menangkap input yang relevan, merespons pasar lebih efisien, dan membangun koneksi baik dengan kreator & klien.”')) !!}
     </p>
   </div>
 </section>
@@ -144,9 +128,9 @@
 <section class="final">
   <div class="glow"></div>
   <div class="wrap">
-    <span class="eyebrow rv" style="justify-content:center">Mari Mulai</span>
-    <h2 class="disp rv">Mau jadi bagian<br><span class="flame">keluarganya?</span></h2>
-    <p class="rv">Talent mencari rumah? Brand mencari kreator? Pintunya di sini.</p>
+    <span class="eyebrow rv" style="justify-content:center">{{ setting('eko_final_eyebrow', 'Mari Mulai') }}</span>
+    <h2 class="disp rv">{!! flame_text(setting('eko_final_title', 'Mau jadi bagian<br>*keluarganya?*')) !!}</h2>
+    <p class="rv">{{ setting('eko_final_text', 'Talent mencari rumah? Brand mencari kreator? Pintunya di sini.') }}</p>
     <div class="hero-cta rv" style="justify-content:center">
       <a class="btn solid" href="{{ route('gabung') }}"><span>Cara Gabung &rarr;</span></a>
       <a class="btn ghost" href="{{ route('kontak') }}"><span>Konsultasi Gratis</span></a>

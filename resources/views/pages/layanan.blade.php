@@ -17,15 +17,35 @@
 @endphp</script>
 @endpush
 
+@php
+    $layPricing = setting_arr('lay_pricing', [
+        ['unit' => 'VOBI MCN', 'title' => 'Live Streaming Support', 'price' => 'Rp 200rb / mulai', 'desc' => 'Studio + host profesional untuk memaksimalkan sesi live.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => route('kontak')],
+        ['unit' => 'VOBI MCN', 'title' => 'Product Footage', 'price' => 'Rp 150rb / mulai', 'desc' => 'Footage videografi produk berkualitas, siap dipasarkan.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => route('kontak')],
+        ['unit' => 'SEAMEDIA · Content', 'title' => 'Viral Content Production', 'price' => 'Rp 2jt / mulai', 'desc' => '', 'bullets' => ['Host & Live 20 jam/bln, atau', '10 Reels/TikTok + 10 feed foto', 'Content plan + riset SEO', 'Laporan insight bulanan'], 'hot' => true, 'cta_label' => 'Lihat Paket →', 'cta_url' => route('creator')],
+        ['unit' => 'SEAMEDIA · Content', 'title' => 'Story Driven Production', 'price' => 'Rp 3jt / mulai', 'desc' => '', 'bullets' => ['3 signature story + 7 daily video', '10 feed content', 'Brand audit & direction', 'Konsultan brand development'], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => route('kontak')],
+        ['unit' => 'Conversion Web', 'title' => 'Launch Package', 'price' => 'Rp 1,25jt', 'desc' => '', 'bullets' => ['Website/landing 7 halaman', 'Dashboard admin basic', 'SEO basic + siap di-index', 'WhatsApp funnel'], 'hot' => true, 'cta_label' => 'Pesan Website →', 'cta_url' => route('kontak')],
+        ['unit' => 'Conversion Web', 'title' => 'Care Package', 'price' => 'Rp 1,5jt', 'desc' => 'Untuk yang sudah punya website — jaga keberlangsungan, update & dukungan teknis.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => route('kontak')],
+        ['unit' => 'Conversion Web', 'title' => 'WA Funnel', 'price' => 'Rp 750rb', 'desc' => 'Landing page + tombol WhatsApp otomatis dengan format chat.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => route('kontak')],
+        ['unit' => 'Conversion Web', 'title' => 'Signature Package', 'price' => 'Custom', 'desc' => 'Desain website premium & eksklusif dengan ciri khas unit bisnis.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Konsultasi', 'cta_url' => route('kontak')],
+    ]);
+    $layProcess = setting_arr('lay_process', [
+        ['title' => 'Discovery', 'desc' => 'Pahami tujuan, audiens, & skala kebutuhanmu.'],
+        ['title' => 'Strategy', 'desc' => 'Petakan talent, platform, & paket yang pas.'],
+        ['title' => 'Production', 'desc' => 'Eksekusi konten & live oleh tim berpengalaman.'],
+        ['title' => 'Launch', 'desc' => 'Tayang, dipantau, dioptimasi real-time.'],
+        ['title' => 'Report', 'desc' => 'Laporan insight & performa tiap bulan.'],
+    ]);
+@endphp
+
 @section('body')
 
 {{-- ===== Hero ===== --}}
 <section class="svc-hero">
   <div class="wrap st">
     <nav class="crumb" aria-label="Breadcrumb"><a href="{{ route('home') }}">Beranda</a><span class="sep">/</span><span>Layanan</span></nav>
-    <span class="eyebrow">Layanan &amp; Harga</span>
-    <h1 class="disp">Dua unit, <span class="flame">satu ekosistem</span>.</h1>
-    <p class="lead2">VOBI MCN untuk talent, affiliate &amp; live streaming TikTok. SEAMEDIA untuk produksi konten &amp; website konversi. Semua dengan harga transparan.</p>
+    <span class="eyebrow">{{ setting('lay_hero_eyebrow', 'Layanan & Harga') }}</span>
+    <h1 class="disp">{!! flame_text(setting('lay_hero_title', 'Dua unit, *satu ekosistem*.')) !!}</h1>
+    <p class="lead2">{{ setting('lay_hero_lead', 'VOBI MCN untuk talent, affiliate & live streaming TikTok. SEAMEDIA untuk produksi konten & website konversi. Semua dengan harga transparan.') }}</p>
     <div class="svc-cats">
       <a href="#mcn"><span class="n">01</span> VOBI MCN</a>
       <a href="#content"><span class="n">02</span> SEAMEDIA Content</a>
@@ -49,7 +69,7 @@
       <div class="svc-detail">
 
         <div class="cat" id="mcn">
-          <div class="ch rv"><span class="cn">01</span><div><h2>VOBI MCN</h2><p class="cp">Rumah bagi 600+ talent — dibina dari micro sampai mega-scale, lengkap dengan sistem affiliate &amp; dukungan live.</p></div></div>
+          <div class="ch rv"><span class="cn">01</span><div><h2>{{ setting('lay_cat1_title', 'VOBI MCN') }}</h2><p class="cp">{{ setting('lay_cat1_desc', 'Rumah bagi 600+ talent — dibina dari micro sampai mega-scale, lengkap dengan sistem affiliate & dukungan live.') }}</p></div></div>
           <div class="subx st">
             <div class="tx img"><div class="im" data-bg="eco1"></div><div class="il"><div class="k">Talent Management</div><div class="n">600+ talent</div></div></div>
             <div class="tx"><span class="b3">Inti</span><h3>MCN &amp; Creator Management</h3><p>Naungan, edukasi, &amp; pelatihan talent — dari micro sampai mega, jadi kreator profesional.</p></div>
@@ -60,7 +80,7 @@
         </div>
 
         <div class="cat" id="content">
-          <div class="ch rv"><span class="cn">02</span><div><h2>SEAMEDIA &middot; Content Creation</h2><p class="cp">Konten promosi konsisten untuk awareness &amp; penjualan — lewat strategi kreatif yang relevan dengan audiens.</p></div></div>
+          <div class="ch rv"><span class="cn">02</span><div><h2>{{ setting('lay_cat2_title', 'SEAMEDIA · Content Creation') }}</h2><p class="cp">{{ setting('lay_cat2_desc', 'Konten promosi konsisten untuk awareness & penjualan — lewat strategi kreatif yang relevan dengan audiens.') }}</p></div></div>
           <div class="subx st mirror">
             <div class="tx img"><div class="im" data-bg="vobi-content"></div><div class="il"><div class="k">Content Creation</div><div class="n">4.000+ creator</div></div></div>
             <div class="tx"><span class="b3">Populer</span><h3>Viral Content Production</h3><p>Reach, engagement &amp; awareness cepat lewat format viral (TikTok/Instagram) yang diadaptasi ke brand.</p><div class="ptag"><small>Mulai dari</small>Rp 2.000.000</div></div>
@@ -71,7 +91,7 @@
         </div>
 
         <div class="cat" id="web">
-          <div class="ch rv"><span class="cn">03</span><div><h2>Conversion Web</h2><p class="cp">Dari konten menuju konversi nyata — website profesional, katalog, &amp; landing page untuk UMKM &amp; unit usaha.</p></div></div>
+          <div class="ch rv"><span class="cn">03</span><div><h2>{{ setting('lay_cat3_title', 'Conversion Web') }}</h2><p class="cp">{{ setting('lay_cat3_desc', 'Dari konten menuju konversi nyata — website profesional, katalog, & landing page untuk UMKM & unit usaha.') }}</p></div></div>
           <div class="subx st">
             <div class="tx img"><div class="im" data-bg="vobi-web"></div><div class="il"><div class="k">Digital Website</div><div class="n">conweb.id</div></div></div>
             <div class="tx"><span class="b3">Launch</span><h3>Website Baru — Launch</h3><p>Website/landing 7 halaman, dashboard admin basic, SEO basic, siap tayang.</p><div class="ptag"><small>Paket</small>Rp 1.250.000</div></div>
@@ -90,59 +110,23 @@
 <section id="harga" style="border-top:1px solid var(--line-2)">
   <div class="wrap">
     <div class="sec-head rv">
-      <div><span class="eyebrow">Paket &amp; Investasi</span><h2 class="disp">Harga transparan.</h2></div>
-      <p class="r">Semua paket bisa dikustomisasi sesuai skala kebutuhanmu.</p>
+      <div><span class="eyebrow">{{ setting('lay_pricing_eyebrow', 'Paket & Investasi') }}</span><h2 class="disp">{{ setting('lay_pricing_title', 'Harga transparan.') }}</h2></div>
+      <p class="r">{{ setting('lay_pricing_sub', 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu.') }}</p>
     </div>
 
     <div class="pricing st">
-      <div class="pcard">
-        <div class="pu">VOBI MCN</div><div class="pt">Live Streaming Support</div>
-        <div class="pp">Rp 200<small>rb / mulai</small></div>
-        <p class="pd">Studio + host profesional untuk memaksimalkan sesi live.</p>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Tanya Detail</span></a>
-      </div>
-      <div class="pcard">
-        <div class="pu">VOBI MCN</div><div class="pt">Product Footage</div>
-        <div class="pp">Rp 150<small>rb / mulai</small></div>
-        <p class="pd">Footage videografi produk berkualitas, siap dipasarkan.</p>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Tanya Detail</span></a>
-      </div>
-      <div class="pcard hot">
-        <div class="pu">SEAMEDIA &middot; Content</div><div class="pt">Viral Content Production</div>
-        <div class="pp">Rp 2<small>jt / mulai</small></div>
-        <ul><li>Host &amp; Live 20 jam/bln, atau</li><li>10 Reels/TikTok + 10 feed foto</li><li>Content plan + riset SEO</li><li>Laporan insight bulanan</li></ul>
-        <a class="btn solid" href="{{ route('creator') }}"><span>Lihat Paket &rarr;</span></a>
-      </div>
-      <div class="pcard">
-        <div class="pu">SEAMEDIA &middot; Content</div><div class="pt">Story Driven Production</div>
-        <div class="pp">Rp 3<small>jt / mulai</small></div>
-        <ul><li>3 signature story + 7 daily video</li><li>10 feed content</li><li>Brand audit &amp; direction</li><li>Konsultan brand development</li></ul>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Tanya Detail</span></a>
-      </div>
-      <div class="pcard hot">
-        <div class="pu">Conversion Web</div><div class="pt">Launch Package</div>
-        <div class="pp">Rp 1,25<small>jt</small></div>
-        <ul><li>Website/landing 7 halaman</li><li>Dashboard admin basic</li><li>SEO basic + siap di-index</li><li>WhatsApp funnel</li></ul>
-        <a class="btn solid" href="{{ route('kontak') }}"><span>Pesan Website &rarr;</span></a>
-      </div>
-      <div class="pcard">
-        <div class="pu">Conversion Web</div><div class="pt">Care Package</div>
-        <div class="pp">Rp 1,5<small>jt</small></div>
-        <p class="pd">Untuk yang sudah punya website — jaga keberlangsungan, update &amp; dukungan teknis.</p>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Tanya Detail</span></a>
-      </div>
-      <div class="pcard">
-        <div class="pu">Conversion Web</div><div class="pt">WA Funnel</div>
-        <div class="pp">Rp 750<small>rb</small></div>
-        <p class="pd">Landing page + tombol WhatsApp otomatis dengan format chat.</p>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Tanya Detail</span></a>
-      </div>
-      <div class="pcard">
-        <div class="pu">Conversion Web</div><div class="pt">Signature Package</div>
-        <div class="pp">Custom</div>
-        <p class="pd">Desain website premium &amp; eksklusif dengan ciri khas unit bisnis.</p>
-        <a class="btn ghost" href="{{ route('kontak') }}"><span>Konsultasi</span></a>
-      </div>
+      @foreach ($layPricing as $pc)
+        <div class="pcard {{ ($pc['hot'] ?? false) ? 'hot' : '' }}">
+          <div class="pu">{{ $pc['unit'] ?? '' }}</div><div class="pt">{{ $pc['title'] ?? '' }}</div>
+          <div class="pp">{{ $pc['price'] ?? '' }}</div>
+          @if (!empty($pc['bullets']))
+            <ul>@foreach ($pc['bullets'] as $bl)<li>{{ $bl }}</li>@endforeach</ul>
+          @elseif (!empty($pc['desc']))
+            <p class="pd">{{ $pc['desc'] }}</p>
+          @endif
+          <a class="btn {{ ($pc['hot'] ?? false) ? 'solid' : 'ghost' }}" href="{{ $pc['cta_url'] ?? route('kontak') }}"><span>{{ $pc['cta_label'] ?? 'Tanya Detail' }}</span></a>
+        </div>
+      @endforeach
     </div>
 
     <div class="rv" style="margin-top:34px">
@@ -163,15 +147,13 @@
 <section style="border-top:1px solid var(--line-2)">
   <div class="wrap">
     <div class="sec-head rv">
-      <div><span class="eyebrow">Cara Kerja</span><h2 class="disp">Lima langkah, tanpa ribet.</h2></div>
-      <p class="r">Alur transparan dari obrolan pertama sampai campaign menang.</p>
+      <div><span class="eyebrow">{{ setting('lay_process_eyebrow', 'Cara Kerja') }}</span><h2 class="disp">{{ setting('lay_process_title', 'Lima langkah, tanpa ribet.') }}</h2></div>
+      <p class="r">{{ setting('lay_process_sub', 'Alur transparan dari obrolan pertama sampai campaign menang.') }}</p>
     </div>
     <div class="process st">
-      <div class="pstep"><div class="pn">01</div><h4>Discovery</h4><p>Pahami tujuan, audiens, &amp; skala kebutuhanmu.</p></div>
-      <div class="pstep"><div class="pn">02</div><h4>Strategy</h4><p>Petakan talent, platform, &amp; paket yang pas.</p></div>
-      <div class="pstep"><div class="pn">03</div><h4>Production</h4><p>Eksekusi konten &amp; live oleh tim berpengalaman.</p></div>
-      <div class="pstep"><div class="pn">04</div><h4>Launch</h4><p>Tayang, dipantau, dioptimasi real-time.</p></div>
-      <div class="pstep"><div class="pn">05</div><h4>Report</h4><p>Laporan insight &amp; performa tiap bulan.</p></div>
+      @foreach ($layProcess as $i => $ps)
+        <div class="pstep"><div class="pn">{{ str_pad($i + 1, 2, '0', STR_PAD_LEFT) }}</div><h4>{{ $ps['title'] ?? '' }}</h4><p>{{ $ps['desc'] ?? '' }}</p></div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -180,9 +162,9 @@
 <section class="final">
   <div class="glow"></div>
   <div class="wrap">
-    <span class="eyebrow rv" style="justify-content:center">Butuh Bantuan?</span>
-    <h2 class="disp rv">Konsultasi <span class="flame">gratis</span> dulu.</h2>
-    <p class="rv">Ceritakan kebutuhanmu — tim kami bantu petakan paket yang paling pas.</p>
+    <span class="eyebrow rv" style="justify-content:center">{{ setting('lay_final_eyebrow', 'Butuh Bantuan?') }}</span>
+    <h2 class="disp rv">{!! flame_text(setting('lay_final_title', 'Konsultasi *gratis* dulu.')) !!}</h2>
+    <p class="rv">{{ setting('lay_final_text', 'Ceritakan kebutuhanmu — tim kami bantu petakan paket yang paling pas.') }}</p>
     <div class="hero-cta rv" style="justify-content:center">
       <a class="btn solid" href="{{ route('kontak') }}"><span>Konsultasi Gratis</span></a>
       <a class="btn ghost" href="{{ route('creator') }}"><span>Lihat Marketplace</span></a>

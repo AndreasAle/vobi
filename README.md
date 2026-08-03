@@ -4,9 +4,16 @@ Website resmi VOBI Group (VOBI MCN & SEAMEDIA) — talent agency & creator econo
 Dibangun dengan **Laravel 12** + Blade + Vite (CSS/JS custom). Data-driven (kreator, campaign, artikel).
 
 ## Fitur
-- Home, Ekosistem, Layanan & Harga, **Creator** (katalog + popup detail + grafik), **Campaign** (listing + detail paket), **Blog** (magazine + artikel), Kontak, Cara Gabung.
-- Form lead (Cara Gabung, Kontak, Ajak Kerjasama) tersimpan ke tabel `leads`.
+- Home, Ekosistem, Layanan & Harga, **Creator** (katalog + popup detail + grafik), **Campaign** (listing + detail paket + masa berlaku), **Blog** (magazine + artikel), Kontak, Cara Gabung.
+- Form lead (Cara Gabung, Kontak, Ajak Kerjasama, Ajukan Campaign) tersimpan ke tabel `leads` **dan dikirim ke email**. Email pengajuan Campaign menyertakan **PIC** penanggung jawab.
 - SEO lengkap: meta, Open Graph, JSON-LD, sitemap.xml, robots.txt.
+
+## Admin / CMS (Filament) — `/admin`
+Login: `admin@vobi.id` / `vobi-admin-2024` (ganti password setelah deploy).
+- **Konten**: CRUD Creator, Campaign (deliverables, masa berlaku ±1 bln, PIC), Artikel (RichEditor + cover).
+- **Tampilan Situs**: editor teks & gambar untuk Global (kontak/footer/nav/SEO), Home, Ekosistem, Layanan — semua field punya fallback ke teks default (tak pecah bila kosong).
+- **Leads / Pesan**: arsip semua submission form + ubah status.
+- Email tujuan diatur di **Global → Email tujuan notifikasi** atau `MAIL_TO` di `.env`. SMTP diisi di `.env` (`MAIL_MAILER`, dst).
 
 ## Setup lokal
 ```bash
@@ -28,10 +35,12 @@ composer install --no-dev --optimize-autoloader
 cp .env.example .env             # isi APP_KEY, APP_URL, kredensial MySQL
 php artisan key:generate
 php artisan migrate --seed --force
+php artisan storage:link
 php artisan config:cache && php artisan route:cache && php artisan view:cache
 ```
-Aset compiled (`public/build`) sudah ikut di repo — tidak wajib `npm build` di server.
+Aset compiled (`public/build`) & aset Filament (`public/css|js/filament`) sudah ikut di repo — tidak wajib `npm build` di server.
 Arahkan document root web ke folder **`public/`**. Pastikan `storage/` & `bootstrap/cache/` writable.
+`storage:link` wajib supaya gambar upload dari admin tampil. Update konten berikutnya: cukup `git pull && php artisan migrate --force && php artisan config:cache`.
 
 ## Catatan
 - `.env` TIDAK ikut di repo (rahasia). Set manual di server.
