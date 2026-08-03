@@ -35,14 +35,20 @@
         $imgRoles = ['eco1','eco2','eco3','eco4','succ1','succ2','succ3','succ4','test','blog1','blog2','blog3','story','avatar',
             'vobi-team','vobi-event','vobi-event2','vobi-beauty','vobi-palette','vobi-content','vobi-web'];
         $imgMap = [];
-        foreach ($imgRoles as $r) { $imgMap[$r] = asset("images/{$r}.webp"); }
-        $imgMap['hero'] = asset('images/hero-poster.webp');
-        $vidMap = [
-            'hero'  => asset('videos/hero.mp4'),
-            'card1' => asset('videos/card1.mp4'),
-            'card2' => asset('videos/card2.mp4'),
-            'card3' => asset('videos/card3.mp4'),
-        ];
+        // Tiap role: pakai gambar upload admin (setting) bila ada, else default bawaan.
+        foreach ($imgRoles as $r) {
+            $ov = setting("media_img_{$r}");
+            $imgMap[$r] = $ov ? media_url($ov) : asset("images/{$r}.webp");
+        }
+        $ovHero = setting('media_img_hero-poster');
+        $imgMap['hero'] = $ovHero ? media_url($ovHero) : asset('images/hero-poster.webp');
+
+        $vidFiles = ['hero' => 'hero.mp4', 'card1' => 'card1.mp4', 'card2' => 'card2.mp4', 'card3' => 'card3.mp4'];
+        $vidMap = [];
+        foreach ($vidFiles as $k => $file) {
+            $ov = setting("media_vid_{$k}");
+            $vidMap[$k] = $ov ? media_url($ov) : asset("videos/{$file}");
+        }
         $ld = json_encode([
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
