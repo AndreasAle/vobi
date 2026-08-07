@@ -48,6 +48,8 @@ class ManageHome extends SettingsPage
                     ->schema([
                         Forms\Components\TextInput::make('title')->label('Judul')->required(),
                         Forms\Components\TextInput::make('tag')->label('Unit'),
+                        Forms\Components\TextInput::make('link')->label('Link tujuan (saat diklik)')
+                            ->placeholder('/creator, /layanan#content, dll'),
                         Forms\Components\ColorPicker::make('color')->label('Warna'),
                         Forms\Components\FileUpload::make('image')->label('Gambar')->image()->directory('home')->disk('public'),
                     ])

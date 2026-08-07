@@ -6,11 +6,11 @@
 @php
     // ===== Default konten (dipakai bila admin belum mengisi) =====
     $svcCards = setting_arr('home_service_cards', [
-        ['title' => 'Creator Management', 'tag' => 'VOBI MCN', 'color' => '#3B2E6E', 'image' => 'eco1'],
-        ['title' => 'Campaign Marketplace', 'tag' => 'VOBI', 'color' => '#B05A32', 'image' => 'eco2'],
-        ['title' => 'Viral & Story Driven Content', 'tag' => 'SEAMEDIA', 'color' => '#1F5D52', 'image' => 'vobi-content'],
-        ['title' => 'Conversion Web & SEO', 'tag' => 'SEAMEDIA', 'color' => '#2B4E86', 'image' => 'vobi-web'],
-        ['title' => 'Live Streaming Service', 'tag' => 'VOBI MCN', 'color' => '#7A3560', 'image' => 'succ3'],
+        ['title' => 'Creator Management', 'tag' => 'VOBI MCN', 'color' => '#3B2E6E', 'image' => 'eco1', 'link' => '/creator'],
+        ['title' => 'Campaign Marketplace', 'tag' => 'VOBI', 'color' => '#B05A32', 'image' => 'eco2', 'link' => '/campaign'],
+        ['title' => 'Viral & Story Driven Content', 'tag' => 'SEAMEDIA', 'color' => '#1F5D52', 'image' => 'vobi-content', 'link' => '/layanan#content'],
+        ['title' => 'Conversion Web & SEO', 'tag' => 'SEAMEDIA', 'color' => '#2B4E86', 'image' => 'vobi-web', 'link' => '/layanan#web'],
+        ['title' => 'Live Streaming Service', 'tag' => 'VOBI MCN', 'color' => '#7A3560', 'image' => 'succ3', 'link' => '/layanan#mcn'],
     ]);
 
     $brands = setting_arr('home_brands', [
@@ -73,7 +73,7 @@
       <div class="shelf-head"><span class="sh-label">Layanan Kami</span><span class="sh-line"></span><span class="sh-hint">geser untuk lihat &rarr;</span></div>
       <div class="svc-strip" id="svcstrip">
         @foreach ($svcCards as $card)
-          <div class="svc-card" style="--c:{{ $card['color'] ?? '#3B2E6E' }}"><div class="pic" style="background-image:url('{{ media_url($card['image'] ?? null, 'eco1') }}')"></div><span class="arrow">&#8599;</span><div class="t">{{ $card['title'] ?? '' }}</div><div class="tag2">{{ $card['tag'] ?? '' }}</div></div>
+          <a class="svc-card" href="{{ $card['link'] ?? '#' }}" style="--c:{{ $card['color'] ?? '#3B2E6E' }}"><div class="pic" style="background-image:url('{{ media_url($card['image'] ?? null, 'eco1') }}')"></div><span class="arrow">&#8599;</span><div class="t">{{ $card['title'] ?? '' }}</div><div class="tag2">{{ $card['tag'] ?? '' }}</div></a>
         @endforeach
       </div>
     </div>

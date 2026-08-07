@@ -20,6 +20,42 @@ class ContentSeeder extends Seeder
                 ['value' => is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) : $value],
             );
         }
+
+        $this->patchServiceCardLinks();
+    }
+
+    /**
+     * Tambahkan 'link' ke kartu layanan yang belum punya (fitur baru, non-destruktif).
+     */
+    private function patchServiceCardLinks(): void
+    {
+        $setting = Setting::where('key', 'home_service_cards')->first();
+        if (! $setting) return;
+
+        $cards = json_decode($setting->value, true);
+        if (! is_array($cards)) return;
+
+        $map = [
+            'Creator Management' => '/creator',
+            'Campaign Marketplace' => '/campaign',
+            'Viral & Story Driven Content' => '/layanan#content',
+            'Conversion Web & SEO' => '/layanan#web',
+            'Live Streaming Service' => '/layanan#mcn',
+        ];
+
+        $changed = false;
+        foreach ($cards as &$card) {
+            if (empty($card['link'])) {
+                $card['link'] = $map[$card['title'] ?? ''] ?? '/layanan';
+                $changed = true;
+            }
+        }
+        unset($card);
+
+        if ($changed) {
+            $setting->value = json_encode($cards, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            $setting->save();
+        }
     }
 
     private function defaults(): array
@@ -56,11 +92,11 @@ class ContentSeeder extends Seeder
             'home_hero_l3' => 'Everything.',
             'home_hero_sub' => 'Every great journey begins with a place to belong. Kami menciptakan rumah — tempat yang nyaman untuk sebuah ide lahir, kolaborasi tumbuh, dan bisnis berkembang.',
             'home_service_cards' => [
-                ['title' => 'Creator Management', 'tag' => 'VOBI MCN', 'color' => '#3B2E6E', 'image' => 'eco1'],
-                ['title' => 'Campaign Marketplace', 'tag' => 'VOBI', 'color' => '#B05A32', 'image' => 'eco2'],
-                ['title' => 'Viral & Story Driven Content', 'tag' => 'SEAMEDIA', 'color' => '#1F5D52', 'image' => 'vobi-content'],
-                ['title' => 'Conversion Web & SEO', 'tag' => 'SEAMEDIA', 'color' => '#2B4E86', 'image' => 'vobi-web'],
-                ['title' => 'Live Streaming Service', 'tag' => 'VOBI MCN', 'color' => '#7A3560', 'image' => 'succ3'],
+                ['title' => 'Creator Management', 'tag' => 'VOBI MCN', 'color' => '#3B2E6E', 'image' => 'eco1', 'link' => '/creator'],
+                ['title' => 'Campaign Marketplace', 'tag' => 'VOBI', 'color' => '#B05A32', 'image' => 'eco2', 'link' => '/campaign'],
+                ['title' => 'Viral & Story Driven Content', 'tag' => 'SEAMEDIA', 'color' => '#1F5D52', 'image' => 'vobi-content', 'link' => '/layanan#content'],
+                ['title' => 'Conversion Web & SEO', 'tag' => 'SEAMEDIA', 'color' => '#2B4E86', 'image' => 'vobi-web', 'link' => '/layanan#web'],
+                ['title' => 'Live Streaming Service', 'tag' => 'VOBI MCN', 'color' => '#7A3560', 'image' => 'succ3', 'link' => '/layanan#mcn'],
             ],
             'home_brands_eyebrow' => 'Dipercaya Oleh',
             'home_brands_title' => 'Brand ternama yang tumbuh bersama kami.',
@@ -192,6 +228,9 @@ class ContentSeeder extends Seeder
             'gabung_brand_note' => 'Ceritakan brand dan tujuan campaign kamu. Tim kami akan bantu carikan kreator yang paling pas, lengkap dengan estimasi harga & SOW.',
             'blog_eyebrow' => 'Latest Blog',
             'blog_heading' => 'Ilmu dari lapangan.',
+            'career_eyebrow' => 'Bergabung',
+            'career_heading' => 'Tumbuh *bareng* kami.',
+            'career_lead' => 'Kami rumah untuk orang yang mau berkembang. Temukan posisi yang cocok, dan mari bangun sesuatu yang berarti.',
         ];
     }
 }

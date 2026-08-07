@@ -10,6 +10,7 @@
       <a href="{{ route('creator') }}" @class(['active' => request()->routeIs('creator')])>Creator</a>
       <a href="{{ route('campaign') }}" @class(['active' => request()->routeIs('campaign*')])>Campaign</a>
       <a href="{{ route('blog') }}" @class(['active' => request()->routeIs('blog*')])>Blog</a>
+      <a href="{{ route('career') }}" @class(['active' => request()->routeIs('career*')])>Career</a>
     </nav>
     <a class="btn solid nav-cta" href="{{ route('kontak') }}"><span>{{ setting('nav_cta_label', 'Konsultasi →') }}</span></a>
     <button class="nav-burger" id="navBurger" aria-label="Buka menu" aria-expanded="false" aria-controls="navDrawer">
@@ -25,6 +26,7 @@
     <a href="{{ route('creator') }}">Creator</a>
     <a href="{{ route('campaign') }}">Campaign</a>
     <a href="{{ route('blog') }}">Blog</a>
+    <a href="{{ route('career') }}">Career</a>
     <a class="btn solid" href="{{ route('kontak') }}"><span>{{ setting('nav_cta_label', 'Konsultasi →') }}</span></a>
   </nav>
 </div>

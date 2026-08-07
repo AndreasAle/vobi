@@ -19,6 +19,9 @@ Route::view('/success', 'pages.success')->name('success');
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{post}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
 
+Route::get('/career', [\App\Http\Controllers\CareerController::class, 'index'])->name('career');
+Route::get('/career/{career}', [\App\Http\Controllers\CareerController::class, 'show'])->name('career.show');
+
 Route::view('/gabung', 'pages.gabung')->name('gabung');
 Route::post('/gabung', [LeadController::class, 'gabung'])->name('gabung.store');
 
@@ -27,7 +30,7 @@ Route::post('/kontak', [LeadController::class, 'kontak'])->name('kontak.store');
 
 // sitemap.xml
 Route::get('/sitemap.xml', function () {
-    $routes = ['home', 'ekosistem', 'layanan', 'creator', 'campaign', 'success', 'blog', 'gabung', 'kontak'];
+    $routes = ['home', 'ekosistem', 'layanan', 'creator', 'campaign', 'success', 'blog', 'career', 'gabung', 'kontak'];
     $urls = collect($routes)->map(fn ($r) => [
         'loc' => route($r),
         'priority' => $r === 'home' ? '1.0' : '0.8',
@@ -38,6 +41,9 @@ Route::get('/sitemap.xml', function () {
     }
     foreach (\App\Models\Post::where('is_published', true)->get() as $post) {
         $urls->push(['loc' => route('blog.show', $post), 'priority' => '0.6']);
+    }
+    foreach (\App\Models\Career::open()->get() as $career) {
+        $urls->push(['loc' => route('career.show', $career), 'priority' => '0.6']);
     }
 
     return response()
