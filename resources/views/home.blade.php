@@ -44,6 +44,15 @@
         ['q' => 'VOBI beroperasi di kota mana?', 'a' => 'Palembang, Jakarta, Bandung, Jogja, Bali, Lampung, dan Jambi — dan terus berkembang.'],
     ]);
 
+    // Fallback link kartu layanan (kalau setting lama belum punya 'link')
+    $svcLinkMap = [
+        'Creator Management' => '/creator',
+        'Campaign Marketplace' => '/campaign',
+        'Viral & Story Driven Content' => '/layanan#content',
+        'Conversion Web & SEO' => '/layanan#web',
+        'Live Streaming Service' => '/layanan#mcn',
+    ];
+
     // Kreator unggulan untuk fan-cards marketplace (real data)
     $fan = \App\Models\Creator::where('is_active', true)
         ->orderByDesc('is_featured')->orderByDesc('gmv_3m')->take(3)->get();
@@ -73,7 +82,8 @@
       <div class="shelf-head"><span class="sh-label">Layanan Kami</span><span class="sh-line"></span><span class="sh-hint">geser untuk lihat &rarr;</span></div>
       <div class="svc-strip" id="svcstrip">
         @foreach ($svcCards as $card)
-          <a class="svc-card" href="{{ $card['link'] ?? '#' }}" style="--c:{{ $card['color'] ?? '#3B2E6E' }}"><div class="pic" style="background-image:url('{{ media_url($card['image'] ?? null, 'eco1') }}')"></div><span class="arrow">&#8599;</span><div class="t">{{ $card['title'] ?? '' }}</div><div class="tag2">{{ $card['tag'] ?? '' }}</div></a>
+          @php $svcHref = ! empty($card['link']) ? $card['link'] : ($svcLinkMap[$card['title'] ?? ''] ?? '/layanan'); @endphp
+          <a class="svc-card" href="{{ $svcHref }}" style="--c:{{ $card['color'] ?? '#3B2E6E' }}"><div class="pic" style="background-image:url('{{ media_url($card['image'] ?? null, 'eco1') }}')"></div><span class="arrow">&#8599;</span><div class="t">{{ $card['title'] ?? '' }}</div><div class="tag2">{{ $card['tag'] ?? '' }}</div></a>
         @endforeach
       </div>
     </div>
