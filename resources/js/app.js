@@ -28,10 +28,19 @@ const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
     if(!open){it.classList.add('open');fa.style.maxHeight=fa.scrollHeight+'px';}}));
   // layanan strip: drag-to-scroll
   const strip=document.getElementById('svcstrip');
-  if(strip){let down=false,sx=0,sl=0;
-    strip.addEventListener('pointerdown',e=>{down=true;sx=e.clientX;sl=strip.scrollLeft;strip.setPointerCapture(e.pointerId);strip.style.cursor='grabbing';});
-    strip.addEventListener('pointermove',e=>{if(down)strip.scrollLeft=sl-(e.clientX-sx);});
-    strip.addEventListener('pointerup',()=>{down=false;strip.style.cursor='grab';});
+  if(strip){let down=false,moved=false,sx=0,sl=0;
+    strip.addEventListener('pointerdown',e=>{down=true;moved=false;sx=e.clientX;sl=strip.scrollLeft;});
+    strip.addEventListener('pointermove',e=>{
+      if(!down)return;
+      const dx=e.clientX-sx;
+      if(!moved&&Math.abs(dx)>6){moved=true;strip.style.cursor='grabbing';try{strip.setPointerCapture(e.pointerId);}catch(_){}}
+      if(moved)strip.scrollLeft=sl-dx;
+    });
+    const end=()=>{down=false;strip.style.cursor='';};
+    strip.addEventListener('pointerup',end);
+    strip.addEventListener('pointercancel',end);
+    // cegah navigasi HANYA kalau barusan nge-drag (klik biasa tetap jalan)
+    strip.addEventListener('click',e=>{if(moved)e.preventDefault();},true);
     const nx=document.getElementById('svcnext');if(nx)nx.addEventListener('click',()=>strip.scrollBy({left:360,behavior:'smooth'}));
   }
 // home: ecosystem staggered showcase (reveal + mouse parallax)
