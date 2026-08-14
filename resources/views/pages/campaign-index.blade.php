@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('title', 'Campaign & Paket — VOBI MCN & SEAMEDIA | VOBI Group')
-@section('meta_description', 'Paket campaign VOBI Group dengan harga transparan: Viral Content (Rp 2jt), Story Driven (Rp 3jt), Live Support (Rp 200rb), Product Footage (Rp 150rb), dan Conversion Web (mulai Rp 1,25jt). Pilih & ajukan.')
-@section('og_title', 'Campaign & Paket VOBI — Harga Transparan')
+@section('meta_description', 'Campaign marketplace VOBI Group — pilih paket campaign dari VOBI MCN, SEAMEDIA, dan unit lainnya. Filter per unit, lihat campaign sorotan, dan ajukan langsung.')
+@section('og_title', 'Campaign Marketplace VOBI Group')
 
 @push('head')
 <script type="application/ld+json">@php
@@ -21,17 +21,55 @@
 <section class="mk-hero">
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="{{ route('home') }}">Beranda</a><span class="sep">/</span><span>Campaign</span></nav>
-    <span class="eyebrow">Paket Campaign</span>
-    <h1 class="disp">Paket <span class="flame">siap jalan</span>.</h1>
-    <p class="lead2">Pilih paket dari VOBI MCN &amp; SEAMEDIA — harga transparan, isi paket jelas. Klik untuk lihat detail lengkapnya.</p>
+    <span class="eyebrow">Campaign Marketplace</span>
+    <h1 class="disp">Campaign <span class="flame">siap jalan</span>.</h1>
+    <p class="lead2">Pilih campaign dari tiap unit VOBI — VOBI MCN, SEAMEDIA, dan lainnya. Saring per unit, atau mulai dari campaign sorotan di bawah.</p>
   </div>
 </section>
 
-<section style="padding-top:44px">
+{{-- ===== Campaign Sorotan (Top) ===== --}}
+@if ($featured)
+<section class="cmp-feat-wrap">
   <div class="wrap">
-    <div class="cmp2-grid st">
+    <div class="cmp-feat-label rv"><span class="star">&#9733;</span> Campaign Sorotan</div>
+    <article class="cmp-feat rv">
+      <a class="cmp-feat-media" href="{{ route('campaign.show', $featured) }}" aria-label="Detail {{ $featured->title }}">
+        <div class="img" style="background-image:url('{{ $featured->image_url }}')"></div>
+        <span class="cmp-feat-cat">{{ $featured->category }}</span>
+      </a>
+      <div class="cmp-feat-body">
+        <div class="cmp-feat-unit">{{ $featured->creator_name }} &middot; {{ $featured->service }}</div>
+        <h2>{{ $featured->title }}</h2>
+        <p>{{ $featured->subtitle }}</p>
+        <div class="cmp-feat-meta">
+          @if ($featured->performance)<span class="pill-good">{{ $featured->performance }}</span>@endif
+          @if ($featured->days_left !== null)<span class="pill-soft">@if($featured->days_left <= 0) Berakhir hari ini @else Berakhir dalam {{ $featured->days_left }} hari @endif</span>@endif
+        </div>
+        <div class="cmp-feat-cta">
+          <a class="btn solid" href="{{ route('campaign.show', $featured) }}"><span>Lihat Detail &rarr;</span></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+@endif
+
+{{-- ===== Filter per Unit + Grid ===== --}}
+<section style="padding-top:36px">
+  <div class="wrap">
+    <div class="cmp-bar rv">
+      <div class="cmp-tabs" id="cmpTabs">
+        <button class="cmp-tab on" data-unit="all">Semua <span>{{ $campaigns->count() }}</span></button>
+        @foreach ($units as $u)
+          @php $n = $campaigns->where('creator_name', $u)->count(); @endphp
+          @if ($n)<button class="cmp-tab" data-unit="{{ $u }}">{{ $u }} <span>{{ $n }}</span></button>@endif
+        @endforeach
+      </div>
+    </div>
+
+    <div class="cmp2-grid st" id="cmpGrid">
       @foreach ($campaigns as $cm)
-        <article class="cmp2">
+        <article class="cmp2 js-cmp" data-unit="{{ $cm->creator_name }}">
           <a class="cmp2-media" href="{{ route('campaign.show', $cm) }}" aria-label="Detail {{ $cm->title }}">
             <span class="cmp2-cat">{{ $cm->category }}</span>
             @if ($cm->days_left !== null)
@@ -46,15 +84,29 @@
             <div class="cmp2-u">{{ $cm->creator_name }} &middot; {{ $cm->service }}</div>
             <h3><a href="{{ route('campaign.show', $cm) }}" style="color:inherit">{{ $cm->title }}</a></h3>
             <div class="cmp2-foot">
-              <div class="pr"><small>Mulai dari</small><b class="tnum">{{ $cm->price_short }}</b></div>
-              <a class="btn solid mini" href="{{ route('campaign.show', $cm) }}"><span>Detail &rarr;</span></a>
+              <a class="btn solid mini" href="{{ route('campaign.show', $cm) }}"><span>Lihat Detail &rarr;</span></a>
             </div>
           </div>
         </article>
       @endforeach
     </div>
+    <div class="cmp-empty" id="cmpEmpty" style="display:none">Belum ada campaign untuk unit ini.</div>
   </div>
 </section>
+
+@push('scripts')
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.cmp-tab'),cards=document.querySelectorAll('.js-cmp'),empty=document.getElementById('cmpEmpty');
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.classList.remove('on');});t.classList.add('on');
+    var u=t.dataset.unit,shown=0;
+    cards.forEach(function(c){var m=(u==='all'||c.dataset.unit===u);c.style.display=m?'':'none';if(m)shown++;});
+    if(empty)empty.style.display=shown?'none':'';
+  });});
+})();
+</script>
+@endpush
 
 {{-- How it works --}}
 <section class="paper">

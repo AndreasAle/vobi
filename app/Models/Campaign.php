@@ -10,8 +10,9 @@ class Campaign extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'price'      => 'integer',
-        'is_active'  => 'boolean',
+        'price'       => 'integer',
+        'is_active'   => 'boolean',
+        'is_featured' => 'boolean',
         'details'    => 'array',
         'highlights' => 'array',
         'starts_at'  => 'date',

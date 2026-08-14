@@ -39,9 +39,16 @@ class MarketplaceController extends Controller
 
     public function campaigns()
     {
-        $campaigns = Campaign::active()->latest()->get();
-        $cats = $campaigns->pluck('category')->unique()->sort()->values();
+        $all = Campaign::active()->orderByDesc('is_featured')->latest()->get();
 
-        return view('pages.campaign-index', compact('campaigns', 'cats'));
+        // Campaign sorotan (top) — utamakan yang di-set is_featured, else yang termahal
+        $featured = $all->firstWhere('is_featured', true) ?? $all->first();
+        $campaigns = $all->reject(fn ($c) => $featured && $c->id === $featured->id)->values();
+
+        // Unit/pemilik campaign untuk filter (VOBI MCN, SEAMEDIA, dll)
+        $units = $all->pluck('creator_name')->filter()->unique()->values();
+        $cats = $all->pluck('category')->unique()->sort()->values();
+
+        return view('pages.campaign-index', compact('campaigns', 'featured', 'units', 'cats'));
     }
 }

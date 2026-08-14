@@ -72,6 +72,8 @@ class CampaignResource extends Resource
                 ->columns(3)
                 ->schema([
                     Forms\Components\Toggle::make('is_active')->label('Aktif')->default(true)->inline(false),
+                    Forms\Components\Toggle::make('is_featured')->label('Top / Sorotan')->inline(false)
+                        ->helperText('Tampil menonjol di atas halaman Campaign.'),
                     Forms\Components\DatePicker::make('starts_at')->label('Mulai')
                         ->default(now())->native(false),
                     Forms\Components\DatePicker::make('ends_at')->label('Berakhir')
@@ -101,6 +103,8 @@ class CampaignResource extends Resource
                 Tables\Columns\TextColumn::make('category')->badge(),
                 Tables\Columns\TextColumn::make('price')->label('Harga')->sortable()
                     ->formatStateUsing(fn ($state) => 'Rp ' . \App\Models\Creator::shortRupiah((int) $state)),
+                Tables\Columns\IconColumn::make('is_featured')->label('Top')->boolean()
+                    ->trueIcon('heroicon-s-star')->trueColor('warning'),
                 Tables\Columns\TextColumn::make('status')->badge()
                     ->color(fn (string $state) => match ($state) {
                         'Aktif' => 'success', 'Terjadwal' => 'info', 'Berakhir' => 'danger', default => 'gray',

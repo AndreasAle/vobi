@@ -117,6 +117,8 @@
     color:var(--ink-dim);white-space:nowrap;opacity:.72;transition:opacity .4s var(--e),transform .4s var(--e),border-color .4s,color .4s}
   .blogo:hover{opacity:1;color:var(--ink);border-color:rgba(217,138,68,.5);transform:translateY(-4px);box-shadow:0 20px 40px -24px rgba(0,0,0,.8)}
   .blogo b{font-family:var(--disp);font-weight:800;font-size:1.4rem;letter-spacing:-.01em}
+  .blogo-img{max-height:52px;max-width:150px;width:auto;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;transition:filter .4s,opacity .4s}
+  .blogo:hover .blogo-img{filter:none;opacity:1}
   .w-serif{font-family:var(--serif)!important;font-weight:600!important;font-size:1.45rem!important}
   .w-ital{font-family:var(--serif)!important;font-style:italic!important;font-weight:600!important;font-size:1.5rem!important}
   .w-caps{text-transform:uppercase;letter-spacing:.2em!important;font-weight:700!important;font-size:1.05rem!important}
@@ -1224,3 +1226,33 @@ body.silver .final{background:linear-gradient(180deg,#141116,#0c0a09);color:var(
 .cr-apply-p{color:var(--ink-dim);font-size:.9rem;line-height:1.5;margin-bottom:4px}
 .cr-apply-box .btn{width:100%;justify-content:center}
 @media(max-width:820px){.cr-detail-grid{grid-template-columns:1fr}.cr-detail-side{position:static}.cr-apply-top{display:none}}
+
+/* ============ CAMPAIGN — Sorotan + Filter (silver page) ============ */
+.cmp-feat-wrap{padding:38px 0 8px}
+.cmp-feat-label{display:inline-flex;align-items:center;gap:8px;font-family:var(--serif);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#8a5a12;margin-bottom:16px}
+.cmp-feat-label .star{color:var(--f2)}
+.cmp-feat{display:grid;grid-template-columns:1.05fr 1fr;gap:0;border-radius:22px;overflow:hidden;background:#fff;
+  border:1px solid rgba(24,19,16,.1);box-shadow:0 40px 80px -50px rgba(24,26,36,.5)}
+.cmp-feat-media{position:relative;min-height:340px;display:block;overflow:hidden}
+.cmp-feat-media .img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1s var(--e)}
+.cmp-feat-media:hover .img{transform:scale(1.05)}
+.cmp-feat-cat{position:absolute;top:16px;left:16px;z-index:2;font-family:var(--serif);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(20,17,16,.6);backdrop-filter:blur(6px);padding:5px 12px;border-radius:999px}
+.cmp-feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center}
+.cmp-feat-unit{font-family:var(--serif);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#8a7f73;margin-bottom:10px}
+.cmp-feat-body h2{font-family:var(--disp);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.1;color:var(--paper-ink);margin:0 0 12px;letter-spacing:-.02em}
+.cmp-feat-body p{color:#6b6157;line-height:1.6;margin:0 0 18px}
+.cmp-feat-meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.pill-good,.pill-soft{font-family:var(--serif);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.pill-good{color:#1f7a44;background:rgba(120,200,120,.14);border:1px solid rgba(120,200,120,.3)}
+.pill-soft{color:#8a5a12;background:rgba(217,138,68,.12);border:1px solid rgba(217,138,68,.3)}
+@media(max-width:780px){.cmp-feat{grid-template-columns:1fr}.cmp-feat-media{min-height:220px}.cmp-feat-body{padding:26px}}
+
+.cmp-bar{margin-bottom:22px}
+.cmp-tabs{display:flex;flex-wrap:wrap;gap:10px}
+.cmp-tab{font-family:var(--serif);font-size:.8rem;letter-spacing:.02em;color:#6b6157;background:#fff;border:1px solid rgba(24,19,16,.12);
+  padding:9px 16px;border-radius:999px;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:7px}
+.cmp-tab span{font-size:.7rem;background:#f0e6d6;color:#8a5a12;padding:1px 7px;border-radius:999px}
+.cmp-tab:hover{border-color:rgba(217,138,68,.5);color:var(--paper-ink)}
+.cmp-tab.on{background:var(--paper-ink);color:#fff;border-color:var(--paper-ink)}
+.cmp-tab.on span{background:rgba(255,255,255,.2);color:#fff}
+.cmp-empty{text-align:center;padding:50px 0;color:#8a7f73;font-family:var(--serif)}

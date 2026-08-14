@@ -13,10 +13,12 @@
         ['title' => 'Live Streaming Service', 'tag' => 'VOBI MCN', 'color' => '#7A3560', 'image' => 'succ3', 'link' => '/layanan#mcn'],
     ]);
 
-    $brands = setting_arr('home_brands', [
+    $brandsRaw = setting_arr('home_brands', [
         'Rinso', 'Unilever', "L'Oréal Paris", 'Listerine', 'Neutrogena', 'Blackmores', 'Y.O.U', 'Baseus', 'Madame Gie', 'Aveeno',
         'Anlene', 'Robot', 'Grandville', 'Mom Uung', 'Anmum', 'Mixio', 'Greney', 'Moell', 'TKIS', 'Revita',
     ]);
+    // Normalisasi: dukung format lama (string) & baru ({name, logo})
+    $brands = array_map(fn ($b) => is_array($b) ? $b : ['name' => $b, 'logo' => null], $brandsRaw);
     $brandStyles = ['w-round', 'w-ital', 'w-caps', 'w-serif', 'w-light'];
     $brandHalf = (int) ceil(count($brands) / 2);
     $brandsA = array_slice($brands, 0, $brandHalf);
@@ -99,14 +101,20 @@
   <div class="brow">
     <div class="btrack l">
       @foreach ($brandsA as $i => $b)
-        <div class="blogo"><b class="{{ $brandStyles[$i % count($brandStyles)] }}">{{ $b }}</b></div>
+        <div class="blogo">
+          @if (!empty($b['logo']))<img class="blogo-img" src="{{ media_url($b['logo']) }}" alt="{{ $b['name'] ?? '' }}" loading="lazy">
+          @else<b class="{{ $brandStyles[$i % count($brandStyles)] }}">{{ $b['name'] ?? '' }}</b>@endif
+        </div>
       @endforeach
     </div>
   </div>
   <div class="brow" style="margin-top:16px">
     <div class="btrack r">
       @foreach ($brandsB as $i => $b)
-        <div class="blogo"><b class="{{ $brandStyles[$i % count($brandStyles)] }}">{{ $b }}</b></div>
+        <div class="blogo">
+          @if (!empty($b['logo']))<img class="blogo-img" src="{{ media_url($b['logo']) }}" alt="{{ $b['name'] ?? '' }}" loading="lazy">
+          @else<b class="{{ $brandStyles[$i % count($brandStyles)] }}">{{ $b['name'] ?? '' }}</b>@endif
+        </div>
       @endforeach
     </div>
   </div>
@@ -127,13 +135,13 @@
     <div class="stats st">
       <div class="stat feat"><span class="tick">/ 01</span>
         <svg class="spark" width="120" height="40" viewBox="0 0 120 40" fill="none"><polyline points="0,34 20,28 40,30 60,18 80,20 100,8 120,4" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="lg" x1="0" y1="0" x2="120" y2="0"><stop stop-color="#D98A44"/><stop offset="1" stop-color="#E2C186"/></linearGradient></defs></svg>
-        <div class="n tnum flame" data-pre="Rp " data-c="{{ setting('home_perf_s1_val', '600') }}" data-suf="Jt">0</div><div class="l">{{ setting('home_perf_s1_label', 'GMV per Sesi Live (talent terbaik)') }}</div></div>
+        <div class="n tnum flame" data-pre="{{ setting('home_perf_s1_pre', 'Rp ') }}" data-c="{{ setting('home_perf_s1_val', '600') }}" data-suf="{{ setting('home_perf_s1_suf', 'Jt') }}">0</div><div class="l">{{ setting('home_perf_s1_label', 'GMV per Sesi Live (talent terbaik)') }}</div></div>
       <div class="stat tall"><span class="tick">/ 02</span>
         <svg class="ring" width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" stroke="rgba(255,255,255,.12)" stroke-width="3" fill="none"/><circle cx="23" cy="23" r="19" stroke="var(--f2)" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="119" stroke-dashoffset="26" transform="rotate(-90 23 23)"/></svg>
-        <div class="n tnum chrome" data-c="{{ setting('home_perf_s2_val', '4600') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s2_label', 'Talent & Creator') }}</div></div>
-      <div class="stat"><span class="tick">/ 03</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s3_val', '800') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s3_label', 'Brand & Seller Partner') }}</div></div>
-      <div class="stat"><span class="tick">/ 04</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s4_val', '2000') }}" data-suf="+">0</div><div class="l">{{ setting('home_perf_s4_label', 'Product Collaboration') }}</div></div>
-      <div class="stat wimg wide"><div class="bgimg" data-bg="vobi-beauty"></div><span class="tick">/ 05</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s5_val', '6') }}" data-suf="">0</div><div class="l">{{ setting('home_perf_s5_label', 'Kategori Produk · Beauty, Fashion, F&B, Home Living, Mom & Baby, Electronic') }}</div></div>
+        <div class="n tnum chrome" data-c="{{ setting('home_perf_s2_val', '4600') }}" data-suf="{{ setting('home_perf_s2_suf', '+') }}">0</div><div class="l">{{ setting('home_perf_s2_label', 'Talent & Creator') }}</div></div>
+      <div class="stat"><span class="tick">/ 03</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s3_val', '800') }}" data-suf="{{ setting('home_perf_s3_suf', '+') }}">0</div><div class="l">{{ setting('home_perf_s3_label', 'Brand & Seller Partner') }}</div></div>
+      <div class="stat"><span class="tick">/ 04</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s4_val', '2000') }}" data-suf="{{ setting('home_perf_s4_suf', '+') }}">0</div><div class="l">{{ setting('home_perf_s4_label', 'Product Collaboration') }}</div></div>
+      <div class="stat wimg wide"><div class="bgimg" data-bg="vobi-beauty"></div><span class="tick">/ 05</span><div class="n tnum chrome" data-c="{{ setting('home_perf_s5_val', '6') }}" data-suf="{{ setting('home_perf_s5_suf', '') }}">0</div><div class="l">{{ setting('home_perf_s5_label', 'Kategori Produk · Beauty, Fashion, F&B, Home Living, Mom & Baby, Electronic') }}</div></div>
       <div class="stat wide"><span class="tick">/ 06</span><div class="n chrome">{{ setting('home_perf_s6_title', 'Official Partner') }}</div><div class="l">{{ setting('home_perf_s6_label', 'TikTok · Shopee · Tokopedia') }}</div></div>
     </div>
   </div>

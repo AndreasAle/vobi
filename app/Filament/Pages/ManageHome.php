@@ -20,9 +20,11 @@ class ManageHome extends SettingsPage
             'home_hero_eyebrow', 'home_hero_l1', 'home_hero_l2', 'home_hero_l3', 'home_hero_sub', 'home_service_cards',
             'home_brands_eyebrow', 'home_brands_title', 'home_brands',
             'home_perf_eyebrow', 'home_perf_title', 'home_perf_sub',
-            'home_perf_s1_val', 'home_perf_s1_label', 'home_perf_s2_val', 'home_perf_s2_label',
-            'home_perf_s3_val', 'home_perf_s3_label', 'home_perf_s4_val', 'home_perf_s4_label',
-            'home_perf_s5_val', 'home_perf_s5_label', 'home_perf_s6_title', 'home_perf_s6_label',
+            'home_perf_s1_pre', 'home_perf_s1_val', 'home_perf_s1_suf', 'home_perf_s1_label',
+            'home_perf_s2_val', 'home_perf_s2_suf', 'home_perf_s2_label',
+            'home_perf_s3_val', 'home_perf_s3_suf', 'home_perf_s3_label',
+            'home_perf_s4_val', 'home_perf_s4_suf', 'home_perf_s4_label',
+            'home_perf_s5_val', 'home_perf_s5_suf', 'home_perf_s5_label', 'home_perf_s6_title', 'home_perf_s6_label',
             'home_eco_eyebrow', 'home_eco_title', 'home_eco_sub', 'home_eco_pillars',
             'home_services_eyebrow', 'home_services_title', 'home_services_sub', 'home_services_rows',
             'home_mkt_title',
@@ -60,7 +62,16 @@ class ManageHome extends SettingsPage
             Section::make('Brand Wall')->columns(2)->schema([
                 Forms\Components\TextInput::make('home_brands_eyebrow')->label('Eyebrow')->placeholder('Dipercaya Oleh'),
                 Forms\Components\TextInput::make('home_brands_title')->label('Judul')->placeholder('Brand ternama yang tumbuh bersama kami.'),
-                Forms\Components\TagsInput::make('home_brands')->label('Daftar brand')->placeholder('Ketik nama brand + Enter')->columnSpanFull(),
+                Forms\Components\Repeater::make('home_brands')->label('Daftar brand')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->label('Nama brand')->required(),
+                        Forms\Components\FileUpload::make('logo')->label('Logo (opsional)')->image()
+                            ->directory('brands')->disk('public')
+                            ->helperText('Kosong = tampil sebagai teks nama.'),
+                    ])
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                    ->collapsed()->cloneable()->grid(2)->columnSpanFull()
+                    ->addActionLabel('Tambah brand'),
             ]),
 
             Section::make('Performance')->columns(3)->schema([
@@ -68,16 +79,22 @@ class ManageHome extends SettingsPage
                 Forms\Components\TextInput::make('home_perf_title')->label('Judul')->placeholder('Angka yang bicara.'),
                 Forms\Components\TextInput::make('home_perf_sub')->label('Subjudul'),
                 Forms\Components\Fieldset::make('Angka statistik')->columns(4)->schema([
+                    Forms\Components\TextInput::make('home_perf_s1_pre')->label('1 — Awalan')->placeholder('Rp '),
                     Forms\Components\TextInput::make('home_perf_s1_val')->label('1 — Angka')->numeric()->helperText('mis. 600'),
-                    Forms\Components\TextInput::make('home_perf_s1_label')->label('1 — Label')->columnSpan(3),
+                    Forms\Components\TextInput::make('home_perf_s1_suf')->label('1 — Akhiran')->placeholder('Jt / Milyar'),
+                    Forms\Components\TextInput::make('home_perf_s1_label')->label('1 — Label'),
                     Forms\Components\TextInput::make('home_perf_s2_val')->label('2 — Angka')->numeric(),
-                    Forms\Components\TextInput::make('home_perf_s2_label')->label('2 — Label')->columnSpan(3),
+                    Forms\Components\TextInput::make('home_perf_s2_suf')->label('2 — Akhiran')->placeholder('+'),
+                    Forms\Components\TextInput::make('home_perf_s2_label')->label('2 — Label')->columnSpan(2),
                     Forms\Components\TextInput::make('home_perf_s3_val')->label('3 — Angka')->numeric(),
-                    Forms\Components\TextInput::make('home_perf_s3_label')->label('3 — Label')->columnSpan(3),
+                    Forms\Components\TextInput::make('home_perf_s3_suf')->label('3 — Akhiran')->placeholder('+'),
+                    Forms\Components\TextInput::make('home_perf_s3_label')->label('3 — Label')->columnSpan(2),
                     Forms\Components\TextInput::make('home_perf_s4_val')->label('4 — Angka')->numeric(),
-                    Forms\Components\TextInput::make('home_perf_s4_label')->label('4 — Label')->columnSpan(3),
+                    Forms\Components\TextInput::make('home_perf_s4_suf')->label('4 — Akhiran')->placeholder('+'),
+                    Forms\Components\TextInput::make('home_perf_s4_label')->label('4 — Label')->columnSpan(2),
                     Forms\Components\TextInput::make('home_perf_s5_val')->label('5 — Angka')->numeric(),
-                    Forms\Components\TextInput::make('home_perf_s5_label')->label('5 — Label')->columnSpan(3),
+                    Forms\Components\TextInput::make('home_perf_s5_suf')->label('5 — Akhiran'),
+                    Forms\Components\TextInput::make('home_perf_s5_label')->label('5 — Label')->columnSpan(2),
                     Forms\Components\TextInput::make('home_perf_s6_title')->label('6 — Teks')->helperText('mis. Official Partner'),
                     Forms\Components\TextInput::make('home_perf_s6_label')->label('6 — Label')->columnSpan(3),
                 ]),

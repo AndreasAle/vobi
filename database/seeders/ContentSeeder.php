@@ -22,6 +22,39 @@ class ContentSeeder extends Seeder
         }
 
         $this->patchServiceCardLinks();
+        $this->patchBrandsToObjects();
+
+        // Patch: ganti heading harga lama (client minta tanpa nominal)
+        $this->patchValue('lay_pricing_eyebrow', 'Paket & Investasi', 'Paket Layanan');
+        $this->patchValue('lay_pricing_title', 'Harga transparan.', 'Pilih paket yang pas.');
+        $this->patchValue('lay_pricing_sub', 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu.', 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu — hubungi kami untuk detail.');
+    }
+
+    /** Ubah home_brands dari daftar string (format lama) menjadi [{name, logo}]. */
+    private function patchBrandsToObjects(): void
+    {
+        $s = Setting::where('key', 'home_brands')->first();
+        if (! $s) return;
+
+        $items = json_decode($s->value, true);
+        if (! is_array($items) || $items === []) return;
+
+        // Sudah format objek? lewati.
+        if (is_array($items[0] ?? null)) return;
+
+        $converted = array_map(fn ($name) => ['name' => (string) $name, 'logo' => null], $items);
+        $s->value = json_encode($converted, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $s->save();
+    }
+
+    /** Ganti nilai setting HANYA jika masih sama dengan nilai lama (non-destruktif). */
+    private function patchValue(string $key, string $old, string $new): void
+    {
+        $s = Setting::where('key', $key)->first();
+        if ($s && $s->value === $old) {
+            $s->value = $new;
+            $s->save();
+        }
     }
 
     /**
@@ -104,11 +137,11 @@ class ContentSeeder extends Seeder
             'home_perf_eyebrow' => 'Performance Overview',
             'home_perf_title' => 'Angka yang bicara.',
             'home_perf_sub' => 'Rekap gabungan ekosistem VOBI Group — VOBI MCN & SEAMEDIA.',
-            'home_perf_s1_val' => '600', 'home_perf_s1_label' => 'GMV per Sesi Live (talent terbaik)',
-            'home_perf_s2_val' => '4600', 'home_perf_s2_label' => 'Talent & Creator',
-            'home_perf_s3_val' => '800', 'home_perf_s3_label' => 'Brand & Seller Partner',
-            'home_perf_s4_val' => '2000', 'home_perf_s4_label' => 'Product Collaboration',
-            'home_perf_s5_val' => '6', 'home_perf_s5_label' => 'Kategori Produk · Beauty, Fashion, F&B, Home Living, Mom & Baby, Electronic',
+            'home_perf_s1_pre' => 'Rp ', 'home_perf_s1_val' => '600', 'home_perf_s1_suf' => 'Jt', 'home_perf_s1_label' => 'GMV per Sesi Live (talent terbaik)',
+            'home_perf_s2_val' => '4600', 'home_perf_s2_suf' => '+', 'home_perf_s2_label' => 'Talent & Creator',
+            'home_perf_s3_val' => '800', 'home_perf_s3_suf' => '+', 'home_perf_s3_label' => 'Brand & Seller Partner',
+            'home_perf_s4_val' => '2000', 'home_perf_s4_suf' => '+', 'home_perf_s4_label' => 'Product Collaboration',
+            'home_perf_s5_val' => '6', 'home_perf_s5_suf' => '', 'home_perf_s5_label' => 'Kategori Produk · Beauty, Fashion, F&B, Home Living, Mom & Baby, Electronic',
             'home_perf_s6_title' => 'Official Partner', 'home_perf_s6_label' => 'TikTok · Shopee · Tokopedia',
             'home_eco_eyebrow' => 'Everything You Need · Under One Roof',
             'home_eco_title' => 'Empat pilar,<br>satu rumah.',
@@ -188,9 +221,9 @@ class ContentSeeder extends Seeder
             'lay_cat2_desc' => 'Konten promosi konsisten untuk awareness & penjualan — lewat strategi kreatif yang relevan dengan audiens.',
             'lay_cat3_title' => 'Conversion Web',
             'lay_cat3_desc' => 'Dari konten menuju konversi nyata — website profesional, katalog, & landing page untuk UMKM & unit usaha.',
-            'lay_pricing_eyebrow' => 'Paket & Investasi',
-            'lay_pricing_title' => 'Harga transparan.',
-            'lay_pricing_sub' => 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu.',
+            'lay_pricing_eyebrow' => 'Paket Layanan',
+            'lay_pricing_title' => 'Pilih paket yang pas.',
+            'lay_pricing_sub' => 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu — hubungi kami untuk detail.',
             'lay_pricing' => [
                 ['unit' => 'VOBI MCN', 'title' => 'Live Streaming Support', 'price' => 'Rp 200rb / mulai', 'desc' => 'Studio + host profesional untuk memaksimalkan sesi live.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => '/kontak'],
                 ['unit' => 'VOBI MCN', 'title' => 'Product Footage', 'price' => 'Rp 150rb / mulai', 'desc' => 'Footage videografi produk berkualitas, siap dipasarkan.', 'bullets' => [], 'hot' => false, 'cta_label' => 'Tanya Detail', 'cta_url' => '/kontak'],

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Layanan & Harga — VOBI MCN & SEAMEDIA | VOBI Group')
-@section('meta_description', 'Layanan lengkap VOBI Group: MCN & TikTok Affiliate (TAP), live streaming support (mulai Rp 200rb), product footage (Rp 150rb), Viral Content (Rp 2jt), Story Driven (Rp 3jt), dan Conversion Web (mulai Rp 1,25jt). Harga transparan.')
-@section('og_title', 'Layanan & Paket VOBI Group — Harga Transparan')
+@section('title', 'Layanan — VOBI MCN & SEAMEDIA | VOBI Group')
+@section('meta_description', 'Layanan lengkap VOBI Group: MCN & TikTok Affiliate (TAP), live streaming support, product footage, Viral & Story Driven Content, dan Conversion Web untuk UMKM. Konsultasi untuk paket yang pas.')
+@section('og_title', 'Layanan VOBI Group — Talent, Konten & Web')
 
 @push('head')
 <script type="application/ld+json">@php
@@ -50,7 +50,7 @@
       <a href="#mcn"><span class="n">01</span> VOBI MCN</a>
       <a href="#content"><span class="n">02</span> SEAMEDIA Content</a>
       <a href="#web"><span class="n">03</span> Conversion Web</a>
-      <a href="#harga"><span class="n">Rp</span> Paket &amp; Harga</a>
+      <a href="#harga"><span class="n">04</span> Paket Layanan</a>
     </div>
   </div>
 </section>
@@ -74,8 +74,8 @@
             <div class="tx img"><div class="im" data-bg="eco1"></div><div class="il"><div class="k">Talent Management</div><div class="n">600+ talent</div></div></div>
             <div class="tx"><span class="b3">Inti</span><h3>MCN &amp; Creator Management</h3><p>Naungan, edukasi, &amp; pelatihan talent — dari micro sampai mega, jadi kreator profesional.</p></div>
             <div class="tx"><span class="b3">Unggulan</span><h3>TikTok Affiliate Partner (TAP)</h3><p>Matchmaking seller &amp; creator + product campaign. 6 kategori. Komisi di atas base, agency min 5%.</p></div>
-            <div class="tx"><h3>Live Streaming Support</h3><p>Studio &amp; host profesional memaksimalkan waktu live.</p><div class="ptag"><small>Mulai dari</small>Rp 200.000</div></div>
-            <div class="tx"><h3>Product Videography Footage</h3><p>Footage produk siap pasar untuk brand/seller.<span> &middot; Ads, Campaign &amp; Tracking tersedia.</span></p><div class="ptag"><small>Mulai dari</small>Rp 150.000</div></div>
+            <div class="tx"><h3>Live Streaming Support</h3><p>Studio &amp; host profesional memaksimalkan waktu live.</p></div>
+            <div class="tx"><h3>Product Videography Footage</h3><p>Footage produk siap pasar untuk brand/seller.<span> &middot; Ads, Campaign &amp; Tracking tersedia.</span></p></div>
           </div>
         </div>
 
@@ -83,8 +83,8 @@
           <div class="ch rv"><span class="cn">02</span><div><h2>{{ setting('lay_cat2_title', 'SEAMEDIA · Content Creation') }}</h2><p class="cp">{{ setting('lay_cat2_desc', 'Konten promosi konsisten untuk awareness & penjualan — lewat strategi kreatif yang relevan dengan audiens.') }}</p></div></div>
           <div class="subx st mirror">
             <div class="tx img"><div class="im" data-bg="vobi-content"></div><div class="il"><div class="k">Content Creation</div><div class="n">4.000+ creator</div></div></div>
-            <div class="tx"><span class="b3">Populer</span><h3>Viral Content Production</h3><p>Reach, engagement &amp; awareness cepat lewat format viral (TikTok/Instagram) yang diadaptasi ke brand.</p><div class="ptag"><small>Mulai dari</small>Rp 2.000.000</div></div>
-            <div class="tx"><h3>Story Driven Production</h3><p>Bangun identitas &amp; hubungan emosional lewat storytelling &amp; signature content.</p><div class="ptag"><small>Mulai dari</small>Rp 3.000.000</div></div>
+            <div class="tx"><span class="b3">Populer</span><h3>Viral Content Production</h3><p>Reach, engagement &amp; awareness cepat lewat format viral (TikTok/Instagram) yang diadaptasi ke brand.</p></div>
+            <div class="tx"><h3>Story Driven Production</h3><p>Bangun identitas &amp; hubungan emosional lewat storytelling &amp; signature content.</p></div>
             <div class="tx"><h3>Host &amp; Live (Fokus Penjualan)</h3><p>20 jam live/bulan, video shoppable, design feed, host &amp; operator.</p></div>
             <div class="tx"><h3>Content Production (Fokus Impresi)</h3><p>10 Reels/TikTok, 10 feed foto, content plan, riset SEO, copywriting caption.</p></div>
           </div>
@@ -94,9 +94,9 @@
           <div class="ch rv"><span class="cn">03</span><div><h2>{{ setting('lay_cat3_title', 'Conversion Web') }}</h2><p class="cp">{{ setting('lay_cat3_desc', 'Dari konten menuju konversi nyata — website profesional, katalog, & landing page untuk UMKM & unit usaha.') }}</p></div></div>
           <div class="subx st">
             <div class="tx img"><div class="im" data-bg="vobi-web"></div><div class="il"><div class="k">Digital Website</div><div class="n">conweb.id</div></div></div>
-            <div class="tx"><span class="b3">Launch</span><h3>Website Baru — Launch</h3><p>Website/landing 7 halaman, dashboard admin basic, SEO basic, siap tayang.</p><div class="ptag"><small>Paket</small>Rp 1.250.000</div></div>
-            <div class="tx"><h3>Website — Care</h3><p>Untuk yang sudah punya website &amp; ingin jaga keberlangsungan + update.</p><div class="ptag"><small>Paket</small>Rp 1.500.000</div></div>
-            <div class="tx"><h3>WA Funnel / Landing Page</h3><p>Landing + tombol WhatsApp otomatis dengan format chat.</p><div class="ptag"><small>Paket</small>Rp 750.000</div></div>
+            <div class="tx"><span class="b3">Launch</span><h3>Website Baru — Launch</h3><p>Website/landing 7 halaman, dashboard admin basic, SEO basic, siap tayang.</p></div>
+            <div class="tx"><h3>Website — Care</h3><p>Untuk yang sudah punya website &amp; ingin jaga keberlangsungan + update.</p></div>
+            <div class="tx"><h3>WA Funnel / Landing Page</h3><p>Landing + tombol WhatsApp otomatis dengan format chat.</p></div>
             <div class="tx"><span class="b3">Custom</span><h3>Signature Package + SEO</h3><p>Desain premium eksklusif &amp; SEO terkategori + Google Business Profile.</p></div>
           </div>
         </div>
@@ -110,15 +110,14 @@
 <section id="harga" style="border-top:1px solid var(--line-2)">
   <div class="wrap">
     <div class="sec-head rv">
-      <div><span class="eyebrow">{{ setting('lay_pricing_eyebrow', 'Paket & Investasi') }}</span><h2 class="disp">{{ setting('lay_pricing_title', 'Harga transparan.') }}</h2></div>
-      <p class="r">{{ setting('lay_pricing_sub', 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu.') }}</p>
+      <div><span class="eyebrow">{{ setting('lay_pricing_eyebrow', 'Paket Layanan') }}</span><h2 class="disp">{{ setting('lay_pricing_title', 'Pilih paket yang pas.') }}</h2></div>
+      <p class="r">{{ setting('lay_pricing_sub', 'Semua paket bisa dikustomisasi sesuai skala kebutuhanmu — hubungi kami untuk detail.') }}</p>
     </div>
 
     <div class="pricing st">
       @foreach ($layPricing as $pc)
         <div class="pcard {{ ($pc['hot'] ?? false) ? 'hot' : '' }}">
           <div class="pu">{{ $pc['unit'] ?? '' }}</div><div class="pt">{{ $pc['title'] ?? '' }}</div>
-          <div class="pp">{{ $pc['price'] ?? '' }}</div>
           @if (!empty($pc['bullets']))
             <ul>@foreach ($pc['bullets'] as $bl)<li>{{ $bl }}</li>@endforeach</ul>
           @elseif (!empty($pc['desc']))
@@ -132,11 +131,11 @@
     <div class="rv" style="margin-top:34px">
       <div class="mk-fglabel" style="margin-bottom:12px">Add-on Conversion Web</div>
       <div class="addons">
-        <span class="addon">Tambah Halaman <b>Rp 200rb</b></span>
-        <span class="addon">Upload Produk <b>Rp 15rb</b>/produk</span>
-        <span class="addon">Edit Konten Ringan <b>Rp 150rb</b></span>
-        <span class="addon">Desain Banner <b>Rp 150rb</b>/banner</span>
-        <span class="addon">Maintenance Bulanan <b>Rp 350rb</b>/bln</span>
+        <span class="addon">Tambah Halaman</span>
+        <span class="addon">Upload Produk</span>
+        <span class="addon">Edit Konten Ringan</span>
+        <span class="addon">Desain Banner</span>
+        <span class="addon">Maintenance Bulanan</span>
         <span class="addon">SEO Terkategori + Google Business</span>
       </div>
     </div>

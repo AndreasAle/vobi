@@ -52,7 +52,7 @@
     <nav class="crumb" aria-label="Breadcrumb"><a href="{{ route('home') }}">Beranda</a><span class="sep">/</span><span>Creator</span></nav>
     <span class="eyebrow">Katalog Talent</span>
     <h1 class="disp">Pilih kreator, <span class="flame">lihat performa</span>, ajak kerjasama.</h1>
-    <p class="lead2">Katalog kreator terverifikasi VOBI — lengkap dengan tier, harga, dan performa 3 bulan terakhir. Semua data di-input &amp; dijaga tim kami.</p>
+    <p class="lead2">Katalog kreator terverifikasi VOBI — lengkap dengan kategori, harga, dan performa 3 bulan terakhir. Semua data di-input &amp; dijaga tim kami.</p>
   </div>
 </section>
 
@@ -79,7 +79,6 @@
         <article class="fcr">
           <div class="fm" data-detail="{{ $cr->id }}" role="button" tabindex="0" aria-label="Detail {{ $cr->name }}">
             <span class="rib">&#9733; Unggulan</span>
-            <span class="rt">{{ $cr->tier }}</span>
             <div class="fi" style="background-image:url('{{ $cr->avatar_url }}')"></div>
             <div class="fnm"><div class="n">{{ $cr->name }}</div><div class="h">{{ $cr->handle }} &middot; {{ $cr->category }}</div></div>
           </div>
@@ -119,9 +118,6 @@
       <div class="mk-fgroup"><span class="mk-fglabel">Kategori</span>
         @foreach ($categories as $c)<span class="chip-f" data-group="category" data-value="{{ $c }}">{{ $c }}</span>@endforeach
       </div>
-      <div class="mk-fgroup"><span class="mk-fglabel">Tier</span>
-        @foreach ($tiers as $t)<span class="chip-f" data-group="tier" data-value="{{ $t }}">{{ $t }}</span>@endforeach
-      </div>
       <span class="mk-count" id="mkCount" style="margin-left:auto"></span>
     </div>
 
@@ -138,7 +134,7 @@
           <div class="crx-cr" data-detail="{{ $cr->id }}" role="button" tabindex="0" aria-label="Detail {{ $cr->name }}">
             <div class="crx-av" style="background-image:url('{{ $cr->avatar_url }}')"></div>
             <div style="min-width:0">
-              <div class="nm">{{ $cr->name }} <span class="tier">{{ $cr->tier }}</span></div>
+              <div class="nm">{{ $cr->name }}</div>
               <div class="hd">{{ $cr->handle }} &middot; {{ $cr->category }} &middot; {{ $cr->city }}</div>
             </div>
           </div>
@@ -165,7 +161,7 @@
       <div><span class="eyebrow" style="justify-content:center">Cara Kerja</span><h2 class="disp">Tiga langkah, satu klik.</h2></div>
     </div>
     <div class="values st">
-      <div class="value"><div class="vn">01</div><div class="vh">Jelajahi</div><div class="vp">Filter sesuai platform, tier &amp; budget.</div></div>
+      <div class="value"><div class="vn">01</div><div class="vh">Jelajahi</div><div class="vp">Filter sesuai platform, kategori &amp; kebutuhan.</div></div>
       <div class="value"><div class="vn">02</div><div class="vh">Ajak</div><div class="vp">Klik kreator, isi form singkat.</div></div>
       <div class="value"><div class="vn">03</div><div class="vh">Jalan</div><div class="vp">Tim kami atur sampai selesai.</div></div>
     </div>
@@ -180,7 +176,7 @@
     <div class="cm-head">
       <div class="cm-av" id="cmAv"></div>
       <div>
-        <div class="cm-name"><span id="cmName"></span><span class="cm-tier" id="cmTier"></span></div>
+        <div class="cm-name"><span id="cmName"></span></div>
         <div class="cm-sub" id="cmSub"></div>
       </div>
     </div>
@@ -228,7 +224,7 @@
 <script>
 (function(){
   // ---- filter + search (tabel) ----
-  var active = { platform:new Set(), category:new Set(), tier:new Set() };
+  var active = { platform:new Set(), category:new Set() };
   document.querySelectorAll('.chip-f').forEach(function(chip){
     chip.addEventListener('click', function(){
       var g = chip.dataset.group, v = chip.dataset.value;
@@ -293,7 +289,6 @@
     curName = d.name;
     $('cmAv').style.backgroundImage = "url('"+d.avatar+"')";
     $('cmName').textContent = d.name;
-    $('cmTier').textContent = d.tier;
     $('cmSub').textContent = d.handle + ' · ' + d.cat + ' · ' + d.platform + ' · ' + d.city;
     $('cmGrowth').textContent = (d.growth>0?'↑ ':'') + d.growth + '% growth';
     $('cmFoll').textContent = d.followers;
