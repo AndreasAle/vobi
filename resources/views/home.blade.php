@@ -222,11 +222,31 @@
     </div>
   </div>
   <div class="wrap">
+    @php
+      $successItems = setting_arr('home_success_items', [
+        ['image' => 'succ1', 'category' => 'Talent · Fashion', 'metric' => 'Rp 600Jt', 'context' => 'satu sesi live', 'handle' => '@kesyamartgorsir'],
+        ['image' => 'blog1', 'category' => 'Talent · F&B', 'metric' => 'Award Tokopedia', 'context' => "Festival Beli Lokal '24", 'handle' => '@siswanto146088'],
+        ['image' => 'blog3', 'category' => 'Talent · F&B', 'metric' => 'Rp 269Jt', 'context' => 'GMV tercapai', 'handle' => '@jajankhasindo99'],
+        ['image' => 'succ4', 'category' => 'Talent · Fashion', 'metric' => 'Rp 101Jt', 'context' => 'GMV tumbuh konsisten', 'handle' => '@bakulankoe88'],
+      ]);
+    @endphp
     <div class="feat-scroll rv">
-      <div class="fcard" data-h><div class="fthumb"><div class="img" data-bg="succ1"></div><span class="cat">Talent · Fashion</span><span class="k flame">Rp 600Jt</span></div><div class="fmeta"><span class="mn">&#64;kesyamartgorsir</span><span class="up">/ satu sesi live</span></div></div>
-      <div class="fcard" data-h><div class="fthumb"><div class="img" data-bg="blog1"></div><span class="cat">Talent · F&amp;B</span><span class="k flame">Award Tokopedia</span></div><div class="fmeta"><span class="mn">&#64;siswanto146088</span><span class="up">Festival Beli Lokal '24</span></div></div>
-      <div class="fcard" data-h><div class="fthumb"><div class="img" data-bg="blog3"></div><span class="cat">Talent · F&amp;B</span><span class="k flame">Rp 269Jt</span></div><div class="fmeta"><span class="mn">&#64;jajankhasindo99</span><span class="up">GMV tercapai</span></div></div>
-      <div class="fcard" data-h><div class="fthumb"><div class="img" data-bg="succ4"></div><span class="cat">Talent · Fashion</span><span class="k flame">Rp 101Jt</span></div><div class="fmeta"><span class="mn">&#64;bakulankoe88</span><span class="up">GMV tumbuh konsisten</span></div></div>
+      @foreach ($successItems as $it)
+        <article class="scard" data-h>
+          <div class="scard-media">
+            <div class="img" style="background-image:url('{{ media_url($it['image'] ?? null, 'succ1') }}')"></div>
+            @if (!empty($it['category']))<span class="scard-cat">{{ $it['category'] }}</span>@endif
+            <div class="scard-overlay">
+              <div class="scard-metric">{{ $it['metric'] ?? '' }}</div>
+              @if (!empty($it['context']))<div class="scard-context">{{ $it['context'] }}</div>@endif
+            </div>
+          </div>
+          <div class="scard-foot">
+            <span class="scard-handle">{{ $it['handle'] ?? '' }}</span>
+            <span class="scard-verified"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Terverifikasi</span>
+          </div>
+        </article>
+      @endforeach
     </div>
     <div style="text-align:center;margin-top:38px"><a class="btn rv" data-h href="{{ route('creator') }}"><span>Lihat Semua Success Story →</span></a></div>
   </div>

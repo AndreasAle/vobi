@@ -28,7 +28,7 @@ class ManageHome extends SettingsPage
             'home_eco_eyebrow', 'home_eco_title', 'home_eco_sub', 'home_eco_pillars',
             'home_services_eyebrow', 'home_services_title', 'home_services_sub', 'home_services_rows',
             'home_mkt_title',
-            'home_success_eyebrow', 'home_success_title', 'home_success_sub',
+            'home_success_eyebrow', 'home_success_title', 'home_success_sub', 'home_success_items',
             'home_testi_quote', 'home_testi_author',
             'home_blog_eyebrow', 'home_blog_title', 'home_blog_sub',
             'home_faq',
@@ -135,6 +135,16 @@ class ManageHome extends SettingsPage
                 Forms\Components\TextInput::make('home_success_eyebrow')->label('Success — Eyebrow'),
                 Forms\Components\TextInput::make('home_success_title')->label('Success — Judul'),
                 Forms\Components\TextInput::make('home_success_sub')->label('Success — Subjudul')->columnSpanFull(),
+                Forms\Components\Repeater::make('home_success_items')->label('Success — Kartu')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')->label('Gambar')->image()->directory('success')->disk('public'),
+                        Forms\Components\TextInput::make('category')->label('Kategori')->placeholder('Talent · Fashion'),
+                        Forms\Components\TextInput::make('metric')->label('Pencapaian (besar)')->placeholder('Rp 600Jt / Award Tokopedia'),
+                        Forms\Components\TextInput::make('context')->label('Keterangan')->placeholder('satu sesi live'),
+                        Forms\Components\TextInput::make('handle')->label('Handle / Nama')->placeholder('@kesyamartgorsir'),
+                    ])
+                    ->itemLabel(fn (array $state): ?string => $state['metric'] ?? null)
+                    ->collapsed()->cloneable()->grid(2)->columnSpanFull()->addActionLabel('Tambah success'),
                 Forms\Components\TextInput::make('home_blog_eyebrow')->label('Blog — Eyebrow'),
                 Forms\Components\TextInput::make('home_blog_title')->label('Blog — Judul'),
                 Forms\Components\TextInput::make('home_blog_sub')->label('Blog — Subjudul')->columnSpanFull(),

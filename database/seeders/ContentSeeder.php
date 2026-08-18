@@ -165,6 +165,12 @@ class ContentSeeder extends Seeder
             'home_success_eyebrow' => 'Featured Success',
             'home_success_title' => 'Bukti, bukan janji.',
             'home_success_sub' => 'Geser untuk lihat transformasi kreator, brand, dan campaign kami. →',
+            'home_success_items' => [
+                ['image' => 'succ1', 'category' => 'Talent · Fashion', 'metric' => 'Rp 600Jt', 'context' => 'satu sesi live', 'handle' => '@kesyamartgorsir'],
+                ['image' => 'blog1', 'category' => 'Talent · F&B', 'metric' => 'Award Tokopedia', 'context' => "Festival Beli Lokal '24", 'handle' => '@siswanto146088'],
+                ['image' => 'blog3', 'category' => 'Talent · F&B', 'metric' => 'Rp 269Jt', 'context' => 'GMV tercapai', 'handle' => '@jajankhasindo99'],
+                ['image' => 'succ4', 'category' => 'Talent · Fashion', 'metric' => 'Rp 101Jt', 'context' => 'GMV tumbuh konsisten', 'handle' => '@bakulankoe88'],
+            ],
             'home_testi_quote' => '"Karena dukungan Tim VOBI, aku bisa dapat sampai *600 juta* dalam satu sesi live. VOBI bener-bener rumah yang ngebimbing."',
             'home_testi_author' => '*Kesya* — Talent Fashion, VOBI MCN',
             'home_blog_eyebrow' => 'Latest Blog',
