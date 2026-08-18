@@ -27,7 +27,8 @@ class ManageHome extends SettingsPage
             'home_perf_s5_val', 'home_perf_s5_suf', 'home_perf_s5_label', 'home_perf_s6_title', 'home_perf_s6_label',
             'home_eco_eyebrow', 'home_eco_title', 'home_eco_sub', 'home_eco_pillars',
             'home_services_eyebrow', 'home_services_title', 'home_services_sub', 'home_services_rows',
-            'home_mkt_title',
+            'home_mkt_title', 'home_mkt_cards',
+            'home_mkt_chip1_v', 'home_mkt_chip1_k', 'home_mkt_chip2_v', 'home_mkt_chip2_k', 'home_mkt_chip3_v', 'home_mkt_chip3_k',
             'home_success_eyebrow', 'home_success_title', 'home_success_sub', 'home_success_items',
             'home_testi_quote', 'home_testi_author',
             'home_blog_eyebrow', 'home_blog_title', 'home_blog_sub',
@@ -132,6 +133,26 @@ class ManageHome extends SettingsPage
             Section::make('Marketplace, Success & Blog (heading)')->columns(2)->schema([
                 Forms\Components\TextInput::make('home_mkt_title')->label('Judul Marketplace')->columnSpanFull()
                     ->helperText('Kata dalam *bintang* akan jadi amber, mis. Campaign *Marketplace*'),
+                Forms\Components\Repeater::make('home_mkt_cards')->label('Kartu Marketplace (3 kartu)')
+                    ->helperText('Urutan: kartu ke-1 = TENGAH (besar), ke-2 = kiri, ke-3 = kanan.')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')->label('Gambar')->image()->imageEditor()->directory('mkt')->disk('public'),
+                        Forms\Components\TextInput::make('name')->label('Nama')->required(),
+                        Forms\Components\TextInput::make('category')->label('Kategori')->placeholder('Fashion · TikTok'),
+                        Forms\Components\TextInput::make('metric')->label('Angka utama')->placeholder('Rp 1,6M'),
+                        Forms\Components\TextInput::make('metric_label')->label('Label angka')->placeholder('GMV / 3bln'),
+                        Forms\Components\TextInput::make('badge')->label('Badge')->placeholder('MACRO / MID'),
+                    ])
+                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                    ->collapsed()->grid(3)->maxItems(3)->columnSpanFull()->addActionLabel('Tambah kartu'),
+                Forms\Components\Fieldset::make('Chip mengambang (3)')->columns(3)->schema([
+                    Forms\Components\TextInput::make('home_mkt_chip1_v')->label('Chip 1 — Nilai')->placeholder('48K'),
+                    Forms\Components\TextInput::make('home_mkt_chip2_v')->label('Chip 2 — Nilai')->placeholder('↑ 6,2%'),
+                    Forms\Components\TextInput::make('home_mkt_chip3_v')->label('Chip 3 — Nilai')->placeholder('Macro'),
+                    Forms\Components\TextInput::make('home_mkt_chip1_k')->label('Chip 1 — Label')->placeholder('Followers'),
+                    Forms\Components\TextInput::make('home_mkt_chip2_k')->label('Chip 2 — Label')->placeholder('Eng. Rate'),
+                    Forms\Components\TextInput::make('home_mkt_chip3_k')->label('Chip 3 — Label')->placeholder('Tier'),
+                ]),
                 Forms\Components\TextInput::make('home_success_eyebrow')->label('Success — Eyebrow'),
                 Forms\Components\TextInput::make('home_success_title')->label('Success — Judul'),
                 Forms\Components\TextInput::make('home_success_sub')->label('Success — Subjudul')->columnSpanFull(),

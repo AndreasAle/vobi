@@ -55,12 +55,13 @@
         'Live Streaming Service' => '/layanan#mcn',
     ];
 
-    // Kreator unggulan untuk fan-cards marketplace (real data)
-    $fan = \App\Models\Creator::where('is_active', true)
-        ->orderByDesc('is_featured')->orderByDesc('gmv_3m')->take(3)->get();
-    $fanCenter = $fan->get(0);
-    $fanLeft = $fan->get(1);
-    $fanRight = $fan->get(2);
+    // Kartu marketplace (editable manual di admin). index 0=tengah, 1=kiri, 2=kanan
+    $mktCards = setting_arr('home_mkt_cards', [
+        ['name' => 'Kesya', 'category' => 'Fashion · TikTok', 'metric' => 'Rp 1,6M', 'metric_label' => 'GMV / 3bln', 'badge' => 'MACRO', 'image' => 'test'],
+        ['name' => 'Siswanto', 'category' => 'Food & Beverage', 'metric' => 'Rp 450Jt', 'metric_label' => 'GMV / 3bln', 'badge' => 'MID', 'image' => 'blog1'],
+        ['name' => 'Jajankhasindo', 'category' => 'Food & Beverage', 'metric' => 'Rp 269Jt', 'metric_label' => 'GMV / 3bln', 'badge' => 'MID', 'image' => 'blog3'],
+    ]);
+    $mktPos = [0 => 'center', 1 => 'left', 2 => 'right'];
 @endphp
 
 @section('body')
@@ -187,24 +188,25 @@
 <section id="mkt">
   <div class="wrap">
     <div class="mkt-head rv"><h2>{!! flame_text(setting('home_mkt_title', 'Campaign *Marketplace*')) !!}</h2></div>
-    @if ($fanCenter)
+    @if (count($mktCards))
     <div class="fanreveal rv">
       <div class="fan">
-        @foreach (['left' => $fanLeft, 'right' => $fanRight, 'center' => $fanCenter] as $pos => $cr)
-          @if ($cr)
-            <a class="slot {{ $pos }}" href="{{ route('creator') }}"><div class="vcard">
-              <div class="vmedia" style="background-image:url('{{ $cr->avatar_url }}')"></div>
-              <div class="badge2">{{ $cr->tier }}</div>
-              <div class="vinfo"><div class="nm">{{ $cr->name }}</div><div class="ni">{{ $cr->category }} · {{ $cr->platform }}</div>
-                <div class="gmv"><span class="v tnum">{{ $cr->gmv_short }}</span><span class="k">GMV / 3bln</span></div></div>
+        @foreach ([1, 2, 0] as $idx)
+          @php $c = $mktCards[$idx] ?? null; @endphp
+          @if ($c)
+            <a class="slot {{ $mktPos[$idx] }}" href="{{ route('creator') }}"><div class="vcard">
+              <div class="vmedia" style="background-image:url('{{ media_url($c['image'] ?? null, 'test') }}')"></div>
+              @if (!empty($c['badge']))<div class="badge2">{{ $c['badge'] }}</div>@endif
+              <div class="vinfo"><div class="nm">{{ $c['name'] ?? '' }}</div><div class="ni">{{ $c['category'] ?? '' }}</div>
+                <div class="gmv"><span class="v tnum">{{ $c['metric'] ?? '' }}</span><span class="k">{{ $c['metric_label'] ?? 'GMV / 3bln' }}</span></div></div>
             </div></a>
           @endif
         @endforeach
-        <div class="fchip a"><div class="v tnum">{{ $fanCenter->followers_short }}</div><div class="k">Followers</div></div>
-        <div class="fchip b"><div class="v up tnum">↑ {{ number_format($fanCenter->engagement_rate, 1, ',', '') }}%</div><div class="k">Eng. Rate</div></div>
+        <div class="fchip a"><div class="v tnum">{{ setting('home_mkt_chip1_v', '48K') }}</div><div class="k">{{ setting('home_mkt_chip1_k', 'Followers') }}</div></div>
+        <div class="fchip b"><div class="v up tnum">{{ setting('home_mkt_chip2_v', '↑ 6,2%') }}</div><div class="k">{{ setting('home_mkt_chip2_k', 'Eng. Rate') }}</div></div>
         <div class="fchip c">
           <svg width="52" height="26" viewBox="0 0 52 26" fill="none"><polyline points="0,22 12,16 22,18 32,9 42,11 52,3" stroke="var(--good)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div><div class="v up tnum">{{ $fanCenter->tier }}</div><div class="k">Tier</div></div>
+          <div><div class="v up tnum">{{ setting('home_mkt_chip3_v', 'Macro') }}</div><div class="k">{{ setting('home_mkt_chip3_k', 'Tier') }}</div></div>
         </div>
       </div>
     </div>

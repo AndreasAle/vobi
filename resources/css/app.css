@@ -44,7 +44,8 @@
   .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--flame);transition:width .35s var(--e)}
   .menu a:hover{color:var(--ink)}.menu a:hover::after{width:100%}
   .btn{font-weight:600;font-size:.86rem;padding:13px 24px;border-radius:3px;cursor:pointer;border:1px solid var(--line);
-    background:transparent;color:var(--ink);position:relative;overflow:hidden;transition:color .4s var(--e)}
+    background:transparent;color:var(--ink);position:relative;overflow:hidden;transition:color .4s var(--e);
+    display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
   .btn span{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px}
   .btn::before{content:"";position:absolute;inset:0;background:var(--flame);transform:translateY(101%);transition:transform .45s var(--e);z-index:1}
   .btn:hover{color:#1a0d00}.btn:hover::before{transform:translateY(0)}
