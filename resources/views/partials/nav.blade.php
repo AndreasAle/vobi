@@ -1,10 +1,16 @@
 <header class="nav">
   <div class="wrap nav-in">
     <a class="brand" href="{{ route('home') }}" aria-label="VOBI beranda">
-      <svg width="34" height="32" aria-hidden="true"><use href="#mark"/></svg>
-      <span class="word chrome">VOBI</span>
+      @php $brandLogo = setting('brand_logo'); @endphp
+      @if ($brandLogo)
+        <img class="brand-logo" src="{{ media_url($brandLogo) }}" alt="VOBI">
+      @else
+        <svg width="34" height="32" aria-hidden="true"><use href="#mark"/></svg>
+        <span class="word chrome">VOBI</span>
+      @endif
     </a>
     <nav class="menu" aria-label="Navigasi utama">
+      <a href="{{ route('home') }}" @class(['active' => request()->routeIs('home')])>Home</a>
       <a href="{{ route('ekosistem') }}" @class(['active' => request()->routeIs('ekosistem')])>Ekosistem</a>
       <a href="{{ route('layanan') }}" @class(['active' => request()->routeIs('layanan')])>Layanan</a>
       <a href="{{ route('creator') }}" @class(['active' => request()->routeIs('creator')])>Creator</a>
@@ -21,6 +27,7 @@
 
 <div class="nav-drawer" id="navDrawer" aria-hidden="true">
   <nav class="nav-drawer-inner" aria-label="Navigasi mobile">
+    <a href="{{ route('home') }}">Home</a>
     <a href="{{ route('ekosistem') }}">Ekosistem</a>
     <a href="{{ route('layanan') }}">Layanan</a>
     <a href="{{ route('creator') }}">Creator</a>

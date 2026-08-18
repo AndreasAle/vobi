@@ -17,6 +17,7 @@ class ManageGlobal extends SettingsPage
     protected function keys(): array
     {
         return [
+            'brand_logo', 'favicon',
             'mail_to',
             'contact_wa_vobi', 'contact_wa_seamedia', 'contact_email', 'contact_address',
             'social_instagram', 'social_tiktok', 'social_youtube',
@@ -29,6 +30,18 @@ class ManageGlobal extends SettingsPage
     protected function formSchema(): array
     {
         return [
+            Section::make('Brand — Logo & Favicon')
+                ->description('Logo tampil di navbar & footer. Favicon = ikon di tab browser.')
+                ->columns(2)
+                ->schema([
+                    Forms\Components\FileUpload::make('brand_logo')->label('Logo')
+                        ->image()->directory('brand')->disk('public')
+                        ->helperText('PNG transparan disarankan. Kosong = pakai logo bawaan (ikon + tulisan VOBI).'),
+                    Forms\Components\FileUpload::make('favicon')->label('Favicon')
+                        ->image()->directory('brand')->disk('public')
+                        ->helperText('Ikon tab browser. Ukuran kotak (mis. 64×64 atau 128×128) PNG/ICO.'),
+                ]),
+
             Section::make('Kontak')
                 ->description('Dipakai di footer & tombol WhatsApp.')
                 ->columns(2)

@@ -28,7 +28,12 @@
     <meta name="twitter:description" content="@yield('og_description', 'Talent agency & creator economy untuk brand dan kreator.')">
     <meta name="twitter:image" content="{{ setting_img('seo_og_image', 'eco1') }}">
 
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%8B%3C/text%3E%3C/svg%3E">
+    @php $favicon = setting('favicon'); @endphp
+    @if ($favicon)
+        <link rel="icon" href="{{ media_url($favicon) }}">
+    @else
+        <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%8B%3C/text%3E%3C/svg%3E">
+    @endif
 
     {{-- ===== Asset map + structured data ===== --}}
     @php

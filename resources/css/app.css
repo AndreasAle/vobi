@@ -37,6 +37,8 @@
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:78px}
   .brand{display:flex;align-items:center;gap:12px}
   .brand .word{font-family:var(--serif);letter-spacing:.34em;font-size:1.05rem;padding-left:.34em}
+  .brand-logo{height:38px;width:auto;max-width:180px;object-fit:contain;display:block}
+  footer .brand-logo{height:44px}
   .menu{display:flex;gap:34px;font-size:.9rem;color:var(--ink-dim)}
   .menu a{position:relative;padding:4px 0;transition:color .3s}
   .menu a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--flame);transition:width .35s var(--e)}

@@ -25,8 +25,13 @@
     <div class="foot-top">
       <div class="col">
         <a class="brand" href="{{ route('home') }}" aria-label="VOBI beranda">
-          <svg width="34" height="32" aria-hidden="true"><use href="#mark"/></svg>
-          <span class="word chrome">VOBI</span>
+          @php $brandLogo = setting('brand_logo'); @endphp
+          @if ($brandLogo)
+            <img class="brand-logo" src="{{ media_url($brandLogo) }}" alt="VOBI">
+          @else
+            <svg width="34" height="32" aria-hidden="true"><use href="#mark"/></svg>
+            <span class="word chrome">VOBI</span>
+          @endif
         </a>
         <p class="lead">{{ setting('footer_tagline', 'A Home Change Everything. Membangun bisnis & kreator bertumbuh bersama.') }}</p>
       </div>
